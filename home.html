@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Dashboard</title>
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
   </head>
   <style>
     /* Reset styles */
@@ -28,6 +32,7 @@
 
     .search-form input {
       padding: 10px;
+      width: 200px; /* Adjust the width as needed */
       border-radius: 5px;
       border: 1px solid #ccc;
       margin-right: 10px;
@@ -40,7 +45,7 @@
     }
 
     .search-form button {
-      padding: 10px 15px;
+      padding: 10px 20px;
       border-radius: 5px;
       border: none;
       background-color: #555;
@@ -50,7 +55,8 @@
     }
 
     .search-form button:hover {
-      background-color: #222; /* Change background color on hover */
+      background-color: #d0d0d0; /* Change background color on hover */
+      color: black; /* Change background color on hover */
     }
 
     .navigation-menu ul li a {
@@ -64,7 +70,7 @@
     }
 
     .navigation-menu ul li a:hover {
-      background-color: #fff;
+      background-color: #ddd;
       color: #333;
       border-color: #fff; /* Change border color on hover */
     }
@@ -72,45 +78,6 @@
     .navigation-menu .dropdown {
       position: relative;
       display: inline-block;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #333;
-      border-radius: 5px;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-      z-index: 1;
-      right: 0;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    .dropdown-content a {
-      color: white;
-      padding: 22px 46px;
-      text-decoration: none;
-      display: block;
-      border-radius: 5px; /* Add rounded borders */
-    }
-
-    .dropdown-content a:hover {
-      background-color: white;
-      color: black;
-    }
-
-    .dropdown .dropbtn {
-      font-size: 14px; /* Adjust the font size as desired */
-      padding: 5px; /* Adjust the padding as desired */
-      width: 30px; /* Adjust the width as desired */
-      border-radius: 3px;
-      border: none;
-      background-color: #555;
-      color: #fff;
-      cursor: pointer;
     }
 
     .tiles {
@@ -129,14 +96,14 @@
       margin: 10px;
       padding: 20px; /* Increase the padding for more space */
       border-radius: 5px;
-      border: 1px solid #ccc;
+      border: 1px solid gray;
       text-align: center;
       transition: all 0.3s ease;
     }
 
     .tile:hover {
       transform: translateY(-5px);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 18px 26px rgba(0, 0, 0, 0.1);
     }
 
     .tile img {
@@ -272,29 +239,37 @@
 
     .category.active {
       background-color: gray;
-      color: #ffffff;
+      color: #fff;
+    }
+    .tagline {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+      text-align: center;
     }
   </style>
   <body>
     <div class="navigation-menu">
       <ul>
         <li>
-          <a href="#">Home Page</a>
+          <a href="#">
+            <i class="fas fa-book-open"></i>
+            <a href="profile.html" class="menu-link">Profile</a>
+            <a href="settings.html" class="menu-link">Settings</a>
+            <a href="index.html" class="menu-link">Logout</a>
+          </a>
         </li>
       </ul>
+      <div class="welcome-message"></div>
       <form class="search-form">
         <input type="text" placeholder="Search books..." id="searchInput" />
-        <button type="submit">Search</button>
+        <button type="submit">
+          <i class="fas fa-search"></i>
+        </button>
       </form>
-      <div class="dropdown">
-        <button class="dropbtn">&#x2630;</button>
-        <div class="dropdown-content">
-          <a href="profile.html">Profile</a>
-          <a href="settings.html">Settings</a>
-          <a href="index.html">Log Out</a>
-        </div>
-      </div>
     </div>
+
+    <h1 class="tagline">Discover a World of Knowledge</h1>
     <div class="sort-box">
       <label for="sortSelect">Sort By:</label>
       <select id="sortSelect">
@@ -303,6 +278,7 @@
         <option value="author">Author</option>
       </select>
     </div>
+
     <div class="categories">
       <button class="category active" onclick="filterBooks('programming')">
         Programming
