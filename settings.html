@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Settings Page</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .settings-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f9f9f9;
+      }
+
+      .settings-card {
+        max-width: 400px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        padding: 100px;
+        text-align: center;
+      }
+
+      .settings-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .settings-option {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .settings-option label {
+        flex: 1;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .settings-option input[type='checkbox'] {
+        margin-right: 5px;
+      }
+
+      .settings-option select {
+        padding: 5px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        margin-left: 5px;
+      }
+
+      .settings-button {
+        background-color: #555;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 3px;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .settings-button:hover {
+        background-color: #333;
+      }
+
+      .back-button {
+        position: absolute;
+        text-decoration: none;
+        top: 20px;
+        left: 20px;
+        background-color: #555;
+        color: #fff;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        border: none;
+        font-size: 24px;
+        line-height: 40px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="settings-container">
+      <div class="settings-card">
+        <div class="back-button" onclick="goBack()">&#8678;</div>
+        <div class="settings-title">Settings</div>
+        <div class="settings-option">
+          <label for="notification-checkbox">Enable Notifications:</label>
+          <input type="checkbox" id="notification-checkbox" />
+        </div>
+
+        <div class="settings-option">
+          <label for="language-select">Language:</label>
+          <select id="language-select">
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <!-- Add more language options as needed -->
+          </select>
+        </div>
+        <div class="settings-option">
+          <label for="theme-select">Theme:</label>
+          <select id="theme-select">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="custom">Custom</option>
+            <!-- Add more theme options as needed -->
+          </select>
+        </div>
+
+        <div class="settings-option">
+          <label for="font-size-select">Font Size:</label>
+          <select id="font-size-select">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+            <!-- Add more font size options as needed -->
+          </select>
+        </div>
+        <!-- Add more settings options as needed -->
+        <button class="settings-button" onclick="saveSettings()">
+          Save Settings
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function goBack() {
+        window.history.back()
+      }
+
+      function saveSettings() {
+        // Get selected values from checkboxes and dropdowns
+        var enableNotifications = document.getElementById(
+          'notification-checkbox'
+        ).checked
+        var selectedLanguage = document.getElementById('language-select').value
+        var selectedTheme = document.getElementById('theme-select').value
+
+        // Perform actions based on the selected values
+        // For example, save the settings to a server or update preferences locally
+
+        // Show a confirmation message
+        alert('Settings saved successfully!')
+      }
+    </script>
+  </body>
+</html>

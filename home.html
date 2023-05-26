@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+  </head>
+  <style>
+    /* Reset styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Global styles */
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    /* Navigation Menu */
+    .navigation-menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+    }
+
+    .search-form input {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+      transition: border-color 0.3s ease; /* Add transition for smooth effect */
+    }
+
+    .search-form input:focus {
+      outline: none;
+      border-color: #555; /* Change border color on focus */
+    }
+
+    .search-form button {
+      padding: 10px 15px;
+      border-radius: 5px;
+      border: none;
+      background-color: #555;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease; /* Add transition for smooth hover effect */
+    }
+
+    .search-form button:hover {
+      background-color: #222; /* Change background color on hover */
+    }
+
+    .navigation-menu ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 15px; /* Increase padding for a larger clickable area */
+      border: 2px solid transparent; /* Add transparent border */
+      border-radius: 5px;
+      margin-right: 10px;
+      transition: all 0.3s ease; /* Add transition for smooth hover effect */
+    }
+
+    .navigation-menu ul li a:hover {
+      background-color: #fff;
+      color: #333;
+      border-color: #fff; /* Change border color on hover */
+    }
+
+    .navigation-menu .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #333;
+      border-radius: 5px;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      right: 0;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 22px 46px;
+      text-decoration: none;
+      display: block;
+      border-radius: 5px; /* Add rounded borders */
+    }
+
+    .dropdown-content a:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .dropdown .dropbtn {
+      font-size: 14px; /* Adjust the font size as desired */
+      padding: 5px; /* Adjust the padding as desired */
+      width: 30px; /* Adjust the width as desired */
+      border-radius: 3px;
+      border: none;
+      background-color: #555;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .tiles {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      border: none; /* Add a border */
+      border-radius: 5px; /* Add border radius */
+      padding: 10px; /* Add padding */
+    }
+
+    .tile {
+      flex-basis: calc(
+        33.33% - 20px
+      ); /* Adjust the flex-basis for the tile size */
+      margin: 10px;
+      padding: 20px; /* Increase the padding for more space */
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .tile:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .tile img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    /* Book Details Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+      max-width: 500px;
+      text-align: center;
+      max-height: 500px; /* Limit the height of the modal content */
+      overflow-y: auto; /* Add a vertical scrollbar when content exceeds max-height */
+      text-align: left; /* Adjust text alignment */
+      position: relative; /* Add relative positioning */
+    }
+
+    .modal-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .modal-content h3 {
+      margin-bottom: 10px;
+    }
+
+    .modal-content p {
+      margin-bottom: 20px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .read-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: #555;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .read-button:hover {
+      background-color: #222;
+    }
+
+    .description {
+      overflow-wrap: break-word; /* Wrap long lines of text */
+    }
+
+    .read-more {
+      color: blue;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .read-more:hover {
+      text-decoration: none;
+    }
+
+    .hide {
+      display: none;
+    }
+    /* Other styles */
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .sort-box {
+      margin-top: 10px;
+      text-align: right;
+    }
+
+    .sort-box label {
+      margin-right: 5px;
+    }
+
+    .sort-box select {
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      transition: border-color 0.3s ease;
+    }
+
+    .categories {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .category {
+      padding: 10px 15px;
+      background-color: #f1f1f1;
+      border: none;
+      border-radius: 4px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .category.active {
+      background-color: gray;
+      color: #ffffff;
+    }
+  </style>
+  <body>
+    <div class="navigation-menu">
+      <ul>
+        <li>
+          <a href="#">Home Page</a>
+        </li>
+      </ul>
+      <form class="search-form">
+        <input type="text" placeholder="Search books..." id="searchInput" />
+        <button type="submit">Search</button>
+      </form>
+      <div class="dropdown">
+        <button class="dropbtn">&#x2630;</button>
+        <div class="dropdown-content">
+          <a href="profile.html">Profile</a>
+          <a href="settings.html">Settings</a>
+          <a href="index.html">Log Out</a>
+        </div>
+      </div>
+    </div>
+    <div class="sort-box">
+      <label for="sortSelect">Sort By:</label>
+      <select id="sortSelect">
+        <option value="alphabetical">A-Z</option>
+        <option value="reverse">Z-A</option>
+        <option value="author">Author</option>
+      </select>
+    </div>
+    <div class="categories">
+      <button class="category active" onclick="filterBooks('programming')">
+        Programming
+      </button>
+      <button class="category" onclick="filterBooks('science')">Science</button>
+      <button class="category" onclick="filterBooks('math')">Math</button>
+      <button class="category" onclick="filterBooks('biography')">
+        Biography
+      </button>
+      <button class="category" onclick="filterBooks('history')">History</button>
+      <button class="category" onclick="filterBooks('fiction')">Fiction</button>
+      <!-- Add more categories as needed -->
+      <!-- Category buttons -->
+    </div>
+
+    <div class="tiles"></div>
+    <div id="bookModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img id="modalImage" src="" alt="Book Cover" />
+        <h3 id="modalTitle"></h3>
+        <p id="modalAuthor"></p>
+        <div id="modalDescription" class="description"></div>
+        <a id="readNowButton" class="read-button" href="#" target="_blank"
+          >Read Now</a
+        >
+      </div>
+    </div>
+    <div class="tiles"></div>
+
+    <script>
+      // JavaScript code...
+      function openModal(image, title, author, description, readLink) {
+        document.getElementById('modalImage').src = image
+        document.getElementById('modalTitle').textContent = title
+        document.getElementById('modalAuthor').textContent = author
+
+        const modalDescription = document.getElementById('modalDescription')
+        const readMoreLink = document.createElement('span')
+        readMoreLink.className = 'read-more'
+        readMoreLink.textContent = 'Read More'
+
+        if (description.length > 150) {
+          const shortDescription = description.substring(0, 150) + '...'
+          modalDescription.textContent = shortDescription
+          modalDescription.appendChild(readMoreLink)
+
+          readMoreLink.addEventListener('click', function () {
+            if (readMoreLink.classList.contains('hide')) {
+              readMoreLink.textContent = 'Read Less'
+              modalDescription.textContent = description
+              readMoreLink.classList.remove('hide')
+            } else {
+              readMoreLink.textContent = 'Read More'
+              modalDescription.textContent = shortDescription
+              readMoreLink.classList.add('hide')
+            }
+          })
+        } else {
+          modalDescription.textContent = description
+        }
+
+        document.getElementById('bookModal').style.opacity = '1'
+        document.getElementById('bookModal').style.visibility = 'visible'
+        const readNowButton = document.getElementById('readNowButton')
+        readNowButton.href = readLink // Set the href of the "Read Now" button to the readLink
+      }
+      function closeModal() {
+        document.getElementById('bookModal').style.opacity = '0'
+        document.getElementById('bookModal').style.visibility = 'hidden'
+      }
+      function searchBooks(event) {
+        event.preventDefault()
+        const searchTerm = document
+          .getElementById('searchInput')
+          .value.toLowerCase()
+        const tiles = document.getElementsByClassName('tile')
+
+        for (let i = 0; i < tiles.length; i++) {
+          const title = tiles[i].querySelector('h3').textContent.toLowerCase()
+          if (title.includes(searchTerm)) {
+            tiles[i].style.display = 'block'
+          } else {
+            tiles[i].style.display = 'none'
+          }
+        }
+      }
+
+      document
+        .querySelector('.search-form')
+        .addEventListener('submit', searchBooks)
+
+      var currentSortOption = 'alphabetical'
+      // Define a function to handle sorting
+      function sortTiles() {
+        const tilesContainer = document.querySelector('.tiles')
+        const tiles = Array.from(tilesContainer.getElementsByClassName('tile'))
+
+        // Sort the tiles based on the current sort option
+        switch (currentSortOption) {
+          case 'alphabetical':
+            tiles.sort((a, b) =>
+              a
+                .querySelector('h3')
+                .textContent.localeCompare(b.querySelector('h3').textContent)
+            )
+            break
+          case 'reverse':
+            tiles.sort((a, b) =>
+              b
+                .querySelector('h3')
+                .textContent.localeCompare(a.querySelector('h3').textContent)
+            )
+            break
+          case 'author':
+            tiles.sort((a, b) =>
+              a
+                .getAttribute('data-author')
+                .localeCompare(b.getAttribute('data-author'))
+            )
+            break
+        }
+
+        // Append the sorted tiles to the tiles container
+        tiles.forEach((tile) => tilesContainer.appendChild(tile))
+      }
+
+      // Update the current sort option and call the sort function when the select value changes
+      document
+        .getElementById('sortSelect')
+        .addEventListener('change', function (event) {
+          currentSortOption = event.target.value
+          sortTiles()
+        })
+
+      // Call the sort function initially to display the tiles in the default order
+      sortTiles()
+      async function fetchBooks(category) {
+        const response = await fetch(
+          `https://www.googleapis.com/books/v1/volumes?q=${category}`
+        )
+        const data = await response.json()
+
+        // Process the fetched data and display it on your webpage
+        const books = data.items
+        const tilesContainer = document.querySelector('.tiles')
+
+        // Clear existing tiles
+        tilesContainer.innerHTML = ''
+
+        books.forEach((book) => {
+          const title = book.volumeInfo.title
+          const author = book.volumeInfo.authors
+            ? book.volumeInfo.authors[0]
+            : 'Unknown Author'
+          const description = book.volumeInfo.description
+            ? book.volumeInfo.description
+            : 'No description available'
+          const coverImage = book.volumeInfo.imageLinks
+            ? book.volumeInfo.imageLinks.thumbnail
+            : 'placeholder.jpg' // Replace "placeholder.jpg" with your default cover image
+          const readLink = book.volumeInfo.infoLink // Add the link to the book
+
+          const tile = document.createElement('div')
+          tile.classList.add('tile')
+          tile.setAttribute('data-author', author)
+          tile.setAttribute('data-category', category) // Add data-category attribute
+          tile.innerHTML = `
+      <img src="${coverImage}" alt="${title}" />
+      <h3>${title}</h3>
+    `
+
+          tile.addEventListener('click', function () {
+            openModal(
+              coverImage,
+              title,
+              `Author: ${author}`,
+              description,
+              readLink
+            ) // Pass the readLink to the openModal function
+          })
+
+          tilesContainer.appendChild(tile)
+        })
+      }
+      // Filter the books based on the selected category
+      function filterBooks(category) {
+        // Update the active category button
+        const buttons = document.getElementsByClassName('category')
+        for (let j = 0; j < buttons.length; j++) {
+          const button = buttons[j]
+          if (button.getAttribute('onclick').includes(category)) {
+            button.classList.add('active')
+          } else {
+            button.classList.remove('active')
+          }
+        }
+
+        fetchBooks(category) // Fetch books for the selected category
+      }
+
+      // Call the fetchBooks function initially to populate the tiles with the default category
+      fetchBooks('programming')
+    </script>
+  </body>
+</html>

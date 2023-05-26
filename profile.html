@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profile Page</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+      }
+
+      .profile-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .profile-card {
+        width: 80%;
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        text-align: center;
+        position: relative;
+      }
+
+      .back-button {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #555;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-button:hover {
+        background-color: #333;
+      }
+
+      .back-button:hover span {
+        color: #fff;
+      }
+
+      .back-button span {
+        font-size: 24px;
+        color: #ccc;
+      }
+
+      .profile-picture {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        background-color: #ccc;
+        background-image: url('assets/img/book1.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+
+      .profile-name {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .profile-email {
+        color: #888;
+        margin-bottom: 20px;
+      }
+
+      .profile-bio {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .bio-text {
+        margin-bottom: 10px;
+      }
+
+      .edit-textarea {
+        display: none;
+        width: 100%;
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .edit-mode .bio-text {
+        display: none;
+      }
+
+      .edit-mode .edit-textarea {
+        display: block;
+      }
+
+      .edit-button {
+        display: inline-block;
+        padding: 8px 16px;
+        font-size: 16px;
+        background-color: #555;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .edit-button:hover {
+        background-color: #333;
+      }
+
+      .save-button {
+        display: none;
+        padding: 8px 16px;
+        font-size: 16px;
+        background-color: #555;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .save-button:hover {
+        background-color: #333;
+      }
+
+      .edit-mode .edit-button {
+        display: none;
+      }
+
+      .edit-mode .save-button {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="back-button">
+      <span>&#8678;</span>
+    </button>
+
+    <div class="profile-container">
+      <div class="profile-card">
+        <div class="profile-picture"></div>
+        <div class="profile-name" id="profile-name"></div>
+        <div class="profile-email" id="profile-email"></div>
+        <div class="profile-bio" id="profile-bio">
+          <span class="bio-text"></span>
+          <textarea class="edit-textarea"></textarea>
+        </div>
+        <button class="edit-button">Edit</button>
+        <button class="save-button">Save</button>
+      </div>
+    </div>
+    <script>
+      // Retrieve the user's name and email from local storage and display them
+      const nameElement = document.getElementById('profile-name')
+      const emailElement = document.getElementById('profile-email')
+      const email = localStorage.getItem('loginEmail')
+      const validData = JSON.parse(localStorage.getItem('valid')) || {}
+
+      if (email && validData[email]) {
+        const name = validData[email].name
+        const userEmail = validData[email].email
+        nameElement.textContent = name
+        emailElement.textContent = userEmail
+      }
+
+      // Retrieve the bio text from local storage based on the user's email
+      const bioTextElement = document.querySelector('.bio-text')
+      const storedBioText = localStorage.getItem(`profileBioText_${email}`)
+
+      // Display the bio text for the current user
+      if (storedBioText) {
+        bioTextElement.textContent = storedBioText
+      }
+
+      // Enable the edit mode for the "About Me" section
+      const profileBioElement = document.getElementById('profile-bio')
+      const editButton = document.querySelector('.edit-button')
+      const saveButton = document.querySelector('.save-button')
+      const bioText = document.querySelector('.bio-text')
+      const editTextarea = document.querySelector('.edit-textarea')
+
+      function enableEditMode() {
+        profileBioElement.classList.add('edit-mode')
+        bioText.style.display = 'none'
+        editTextarea.style.display = 'block'
+        editTextarea.value = bioText.textContent.trim()
+        editTextarea.focus()
+        editButton.style.display = 'none'
+        saveButton.style.display = 'inline-block'
+      }
+
+      function disableEditMode() {
+        profileBioElement.classList.remove('edit-mode')
+        bioText.style.display = 'inline'
+        editTextarea.style.display = 'none'
+        editButton.style.display = 'inline-block'
+        saveButton.style.display = 'none'
+      }
+
+      function saveBioText() {
+        const editedBioText = editTextarea.value
+        bioText.textContent = editedBioText
+        disableEditMode()
+
+        // Store the edited bio text in local storage with the user's email as the key
+        localStorage.setItem(`profileBioText_${email}`, editedBioText)
+      }
+
+      function handleTextareaKeyDown(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+          event.preventDefault()
+          saveBioText()
+        }
+      }
+
+      editButton.addEventListener('click', enableEditMode)
+      saveButton.addEventListener('click', saveBioText)
+      editTextarea.addEventListener('keydown', handleTextareaKeyDown)
+
+      // Navigate back when the back button is clicked
+      const backButton = document.querySelector('.back-button')
+      backButton.addEventListener('click', () => {
+        history.back()
+      })
+    </script>
+  </body>
+</html>
