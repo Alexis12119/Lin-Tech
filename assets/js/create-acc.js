@@ -1,3 +1,26 @@
+// Retrieve the input values from localStorage if they exist
+window.addEventListener('load', () => {
+  const nameInput = document.getElementById('register-name')
+  const emailInput = document.getElementById('register-email')
+  const passwordInput = document.getElementById('register-pass')
+
+  const storedName = localStorage.getItem('registerName')
+  const storedEmail = localStorage.getItem('registerEmail')
+  const storedPassword = localStorage.getItem('registerPassword')
+
+  if (storedName) {
+    nameInput.value = storedName
+  }
+
+  if (storedEmail) {
+    emailInput.value = storedEmail
+  }
+
+  if (storedPassword) {
+    passwordInput.value = storedPassword
+  }
+})
+
 const handleFormSubmit = (event) => {
   event.preventDefault()
 
@@ -8,43 +31,49 @@ const handleFormSubmit = (event) => {
   const email = emailInput.value.trim()
   const password = passwordInput.value.trim()
 
-  // Rest of the code...
+  // Store the input values in localStorage
+  localStorage.setItem('registerName', name)
+  localStorage.setItem('registerEmail', email)
+  localStorage.setItem('registerPassword', password)
 
-  // If all inputs are valid, you can proceed with saving the user data
-  if (name && email && password) {
-    // Retrieve existing data from localStorage or create an empty object if it doesn't exist
-    const validData = JSON.parse(localStorage.getItem('valid')) || {}
+  // Retrieve existing data from localStorage or create an empty object if it doesn't exist
+  const validData = JSON.parse(localStorage.getItem('valid')) || {}
 
-    // Check if the email already exists in the stored data
-    if (validData.hasOwnProperty(email)) {
-      errorMessage.textContent =
-        'Email already exists. Please choose a different email.'
-      openModal()
-      emailInput.focus()
-      return
-    }
-
-    // Create the settings object for the new user
-    const settings = {
-      enableNotifications: false, // Set the default value for enableNotifications
-      selectedLanguage: 'en', // Set the default value for selectedLanguage
-      selectedTheme: 'light', // Set the default value for selectedTheme
-      selectedFontSize: 'small', // Set the default value for selectedFontSize
-    }
-
-    // Add the new user to the stored data with their settings
-    validData[email] = {
-      name: name,
-      password: password,
-      settings: settings,
-    }
-
-    // Save the updated data back to localStorage
-    localStorage.setItem('valid', JSON.stringify(validData))
-
-    // Redirect to another page or perform other actions
-    window.location.href = 'index.html'
+  // Check if the email already exists in the stored data
+  if (validData.hasOwnProperty(email)) {
+    errorMessage.textContent = 'Email already exists.'
+    openModal()
+    emailInput.focus()
+    return
   }
+
+  // Create the settings object for the new user
+  const settings = {
+    enableNotifications: false, // Set the default value for enableNotifications
+    selectedLanguage: 'en', // Set the default value for selectedLanguage
+    selectedTheme: 'light', // Set the default value for selectedTheme
+    selectedFontSize: 'small', // Set the default value for selectedFontSize
+  }
+
+  // Add the new user to the stored data with their settings
+  validData[email] = {
+    name: name,
+    password: password,
+    settings: settings,
+  }
+
+  // Save the updated data back to localStorage
+  localStorage.setItem('valid', JSON.stringify(validData))
+
+  // Redirect to another page or perform other actions
+  window.location.href = 'index.html'
+}
+
+const errorMessage = document.getElementById('error-message')
+
+function openModal() {
+  const modal = document.getElementById('error-modal')
+  modal.style.display = 'block'
 }
 
 // Add event listener to the form submit button

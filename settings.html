@@ -142,14 +142,12 @@
       function goBack() {
         window.history.back()
       }
-      const email = localStorage.getItem('loginEmail')
-      console.log(email)
+
       function saveSettings() {
         const validData = JSON.parse(localStorage.getItem('valid')) || {}
 
         // Retrieve the logged-in user's email
         const email = localStorage.getItem('loginEmail')
-        console.log(email)
 
         // Get selected values from checkboxes and dropdowns
         const enableNotifications = document.getElementById(
