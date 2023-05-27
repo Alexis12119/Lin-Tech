@@ -458,7 +458,7 @@
             : 'No description available'
           const coverImage = book.volumeInfo.imageLinks
             ? book.volumeInfo.imageLinks.thumbnail
-            : 'placeholder.jpg' // Replace "placeholder.jpg" with your default cover image
+            : 'assets/img/default_book.jpg' 
           const readLink = book.volumeInfo.infoLink // Add the link to the book
 
           const tile = document.createElement('div')
