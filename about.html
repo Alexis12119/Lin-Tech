@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <style>
       /* Add some CSS to create round borders */
       .about-title {
@@ -22,15 +26,18 @@
       }
 
       .container {
-        width: 80%; /* Adjust the width as desired */
-        max-width: 500px; /* Adjust the max-width as desired */
+        width: 80%;
+        max-width: 500px;
         background-color: #ddd;
         padding: 20px;
         border-radius: 10px;
-        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
-        box-shadow: 0 0 50px rgba(1, 0, 0, 2.9); /* Add this line for the shadow effect */
-        margin: auto; /* Center the container */
-        text-align: center; /* Center the text inside the container */
+        box-shadow: 0 0 50px rgba(1, 0, 0, 2.9);
+        margin: 0 auto; /* Center the container horizontally */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center the container vertically */
+        text-align: center;
       }
 
       /* Add some spacing between elements */
@@ -109,6 +116,24 @@
         color: #121212;
         margin: 0;
       }
+
+      .made-by {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .made-by-icon {
+        margin-right: 10px;
+        color: #555;
+        font-size: 15px;
+      }
+
+      .made-by-text {
+        font-size: 16px;
+        color: #333;
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
@@ -117,7 +142,9 @@
     <div class="container">
       <div class="about">
         <h2 class="about-title">About</h2>
-        <h5 class="about-description">A project for Human Computer Interaction (HCI)</h5>
+        <h5 class="about-description">
+          A project for Human Computer Interaction (HCI)
+        </h5>
         <div class="about-content">
           <p>
             <b>Leader:</b><br />
@@ -131,7 +158,10 @@
         </div>
       </div>
 
-      <p>Made by Alexis Corporal</p>
+      <div class="made-by">
+        <span class="made-by-icon"><i class="fas fa-pen"></i></span>
+        <span class="made-by-text">Made by Alexis Corporal</span>
+      </div>
     </div>
   </body>
 </html>
