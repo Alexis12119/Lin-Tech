@@ -8,7 +8,6 @@
     />
   </head>
   <style>
-    /* Reset styles */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -94,11 +93,13 @@
       border: 1px solid gray;
       text-align: center;
       transition: all 0.3s ease;
+     background-color: #ddd;
+      border-color: #808080;
     }
 
     .tile:hover {
       transform: translateY(-5px);
-      box-shadow: 0 18px 26px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 50px rgba(1, 0, 0, 2.9); /* Add this line for the shadow effect */
     }
 
     .tile img {
@@ -195,10 +196,10 @@
     .hide {
       display: none;
     }
-    /* Other styles */
     body {
       margin: 0;
       padding: 0;
+      background-color: #d0d0d0;
     }
 
     .sort-box {
@@ -231,18 +232,18 @@
       overflow-x: auto; /* Add horizontal scroll when categories overflow */
     }
 
-    .category {
-      padding: 10px 15px;
-      background-color: #f1f1f1;
-      border: none;
-      border-radius: 4px;
-      margin-right: 10px;
-      cursor: pointer;
-    }
+.category {
+  padding: 10px 15px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 4px;
+  margin-right: 10px;
+  cursor: pointer;
+}
 
     .category.active {
-      background-color: gray;
-      color: #fff;
+ background-color: #555;
+  color: #fff;
     }
 
     .category-arrow {
@@ -263,7 +264,7 @@
     .category-arrow:hover {
       background-color: #ddd;
     }
-  </style>
+    </style>
   <body>
     <div class="navigation-menu">
       <ul>
