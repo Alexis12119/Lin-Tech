@@ -75,11 +75,6 @@
       border-color: #fff; /* Change border color on hover */
     }
 
-    .navigation-menu .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
     .tiles {
       display: flex;
       flex-wrap: wrap;
@@ -222,10 +217,18 @@
       transition: border-color 0.3s ease;
     }
 
+    .tagline {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+      text-align: center;
+    }
+
     .categories {
       display: flex;
       justify-content: center;
       margin-bottom: 20px;
+      overflow-x: auto; /* Add horizontal scroll when categories overflow */
     }
 
     .category {
@@ -241,11 +244,24 @@
       background-color: gray;
       color: #fff;
     }
-    .tagline {
-      font-size: 18px;
-      font-weight: bold;
-      margin-top: 10px;
-      text-align: center;
+
+    .category-arrow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f1f1f1;
+      border: none;
+      border-radius: 4px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .category-arrow i {
+      padding: 5px;
+    }
+
+    .category-arrow:hover {
+      background-color: #ddd;
     }
   </style>
   <body>
@@ -256,6 +272,7 @@
             <i class="fas fa-book-open"></i>
             <a href="profile.html" class="menu-link">Profile</a>
             <a href="settings.html" class="menu-link">Settings</a>
+            <a href="about.html" class="menu-link">About</a>
             <a href="index.html" class="menu-link">Logout</a>
           </a>
         </li>
@@ -269,7 +286,8 @@
       </form>
     </div>
 
-    <h1 class="tagline">Discover a World of Knowledge</h1>
+    <h1 class="tagline">Empowering Curious Minds</h1>
+    <div class="sort-box">
     <div class="sort-box">
       <label for="sortSelect">Sort By:</label>
       <select id="sortSelect">
@@ -283,15 +301,15 @@
       <button class="category active" onclick="filterBooks('programming')">
         Programming
       </button>
+      <button class="category" onclick="filterBooks('technology')">Technology</button>
+      <button class="category" onclick="filterBooks('games')">Games</button>
       <button class="category" onclick="filterBooks('science')">Science</button>
       <button class="category" onclick="filterBooks('math')">Math</button>
       <button class="category" onclick="filterBooks('biography')">
         Biography
       </button>
       <button class="category" onclick="filterBooks('history')">History</button>
-      <button class="category" onclick="filterBooks('fiction')">Fiction</button>
       <!-- Add more categories as needed -->
-      <!-- Category buttons -->
     </div>
 
     <div class="tiles"></div>
@@ -482,6 +500,15 @@
 
       // Call the fetchBooks function initially to populate the tiles with the default category
       fetchBooks('programming')
+function scrollCategories(direction) {
+        const categoriesContainer = document.querySelector('.categories');
+        const scrollAmount = 200; // Adjust the scroll amount as needed
+        if (direction === 'left') {
+          categoriesContainer.scrollLeft -= scrollAmount;
+        } else if (direction === 'right') {
+          categoriesContainer.scrollLeft += scrollAmount;
+        }
+      }
     </script>
   </body>
 </html>

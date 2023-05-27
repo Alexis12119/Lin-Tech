@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Add some CSS to create round borders */
+      .about-title {
+        border: 2px solid #000;
+        border-radius: 20px;
+        padding: 10px;
+        display: inline-block;
+        background-color: black;
+        color: #f1f1f1;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      /* Set the overall styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #d0d0d0;
+      }
+
+      .container {
+        width: 80%; /* Adjust the width as desired */
+        max-width: 500px; /* Adjust the max-width as desired */
+        background-color: #ddd;
+        padding: 20px;
+        border-radius: 10px;
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
+        box-shadow: 0 0 50px rgba(1, 0, 0, 2.9); /* Add this line for the shadow effect */
+        margin: auto; /* Center the container */
+        text-align: center; /* Center the text inside the container */
+      }
+
+      /* Add some spacing between elements */
+      .container > * {
+        margin-bottom: 20px;
+      }
+
+      .back-button {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #555;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        color: #fff;
+        font-size: 24px;
+        text-decoration: none;
+        z-index: 9999;
+      }
+
+      .back-button:hover {
+        background-color: #333;
+      }
+
+      .back-button:before {
+        content: '\2190'; /* Unicode character for left arrow */
+      }
+
+      .back-button:hover:before {
+        color: #fff;
+      }
+
+      .back-button:focus {
+        outline: none;
+      }
+
+      .back-button:focus:before {
+        color: #fff;
+      }
+
+      .back-button:active {
+        transform: scale(0.95);
+      }
+
+      .back-button:active:before {
+        color: #fff;
+      }
+
+      .about {
+        position: relative;
+        z-index: 1;
+      }
+
+      .about:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        pointer-events: none;
+      }
+
+      .about-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .about-description {
+        font-size: 18px;
+        font-weight: bold;
+        color: #121212;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="back-button" href="home.html"></a>
+
+    <div class="container">
+      <div class="about">
+        <h2 class="about-title">About</h2>
+        <h5 class="about-description">A project for Human Computer Interaction (HCI)</h5>
+        <div class="about-content">
+          <p>
+            <b>Leader:</b><br />
+            Jasper Velasco<br /><br />
+            <b>Group Members:</b><br />
+            Alexis Corporal<br />
+            Victor Yumol<br />
+            Ken Martin Reyes<br />
+            Buensalida<br />
+          </p>
+        </div>
+      </div>
+
+      <p>Made by Alexis Corporal</p>
+    </div>
+  </body>
+</html>
