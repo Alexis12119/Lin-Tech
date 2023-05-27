@@ -33,6 +33,8 @@ const handleFormSubmit = (event) => {
   const email = emailInput.value
   const password = passwordInput.value
 
+  const validData = JSON.parse(localStorage.getItem('valid')) || {}
+  console.log(validData)
   if (email && password) {
     const validData = JSON.parse(localStorage.getItem('valid')) || {}
 

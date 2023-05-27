@@ -18,12 +18,12 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        background-color: #D0D0D0;
+        background-color: #d0d0d0;
       }
 
       .settings-card {
         max-width: 400px;
-        background-color: #DDD;
+        background-color: #ddd;
         border-radius: 8px;
         /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); */
         box-shadow: 0 0 50px rgba(1, 0, 0, 2.9); /* Add this line for the shadow effect */
@@ -142,21 +142,72 @@
       function goBack() {
         window.history.back()
       }
-
+      const email = localStorage.getItem('loginEmail')
+      console.log(email)
       function saveSettings() {
+        const validData = JSON.parse(localStorage.getItem('valid')) || {}
+
+        // Retrieve the logged-in user's email
+        const email = localStorage.getItem('loginEmail')
+        console.log(email)
+
         // Get selected values from checkboxes and dropdowns
-        var enableNotifications = document.getElementById(
+        const enableNotifications = document.getElementById(
           'notification-checkbox'
         ).checked
-        var selectedLanguage = document.getElementById('language-select').value
-        var selectedTheme = document.getElementById('theme-select').value
+        const selectedLanguage =
+          document.getElementById('language-select').value
+        const selectedTheme = document.getElementById('theme-select').value
+        const selectedFontSize =
+          document.getElementById('font-size-select').value
 
-        // Perform actions based on the selected values
-        // For example, save the settings to a server or update preferences locally
+        // Create or update the settings for the current user
+        const settings = {
+          enableNotifications,
+          selectedLanguage,
+          selectedTheme,
+          selectedFontSize,
+        }
+
+        // Update the settings for the current user
+        validData[email].settings = settings
+
+        // Update the validData object in localStorage
+        localStorage.setItem('valid', JSON.stringify(validData))
 
         // Show a confirmation message
         alert('Settings saved successfully!')
       }
+
+      function loadSettings() {
+        // Load settings from local storage based on the current user's email
+        const email = localStorage.getItem('loginEmail')
+        const validData = JSON.parse(localStorage.getItem('valid')) || {}
+
+        if (validData[email] && validData[email].settings) {
+          const settings = validData[email].settings
+
+          // Set the saved values in the form
+          document.getElementById('notification-checkbox').checked =
+            settings.enableNotifications
+          document.getElementById('language-select').value =
+            settings.selectedLanguage
+          document.getElementById('theme-select').value = settings.selectedTheme
+          document.getElementById('font-size-select').value =
+            settings.selectedFontSize
+        } else {
+          // Set default values in the form if settings are not found
+          document.getElementById('notification-checkbox').checked = false
+          document.getElementById('language-select').value = 'en'
+          document.getElementById('theme-select').value = 'light'
+          document.getElementById('font-size-select').value = 'medium'
+        }
+      }
+
+      // Load saved settings on page load
+      window.addEventListener('DOMContentLoaded', function () {
+        loadSettings()
+      })
     </script>
   </body>
 </html>
