@@ -37,6 +37,10 @@ const handleFormSubmit = (event) => {
   }
 };
 
+// Add event listener to the form submit button
+const submitButton = document.querySelector('.register__button');
+submitButton.addEventListener('click', handleFormSubmit);
+
 /*=============== SHOW HIDDEN - PASSWORD ===============*/
 const showHiddenPass = (loginPass, loginEye) => {
   const input = document.getElementById(loginPass),

@@ -1,27 +1,24 @@
 const handleFormSubmit = (event) => {
-  event.preventDefault();
+  event.preventDefault()
 
-  const emailInput = document.getElementById('email');
-  const email = emailInput.value;
+  const emailInput = document.getElementById('email')
+  const email = emailInput.value
 
   if (email) {
-    const validData = JSON.parse(localStorage.getItem('valid')) || {};
+    const validData = JSON.parse(localStorage.getItem('valid')) || {}
 
     if (email in validData) {
       // Save the input email to localStorage
-      localStorage.setItem('resetEmail', email);
+      localStorage.setItem('resetEmail', email)
 
       // Redirect to the reset password page
-      window.location.href = 'reset-password.html';
+      window.location.href = 'reset-password.html'
+    } else {
+      alert('Email not found')
     }
-    // else {
-    //   const errorMessage = document.getElementById('error-message');
-    //   errorMessage.textContent = 'Email not found';
-    //   errorMessage.style.display = 'block';
-    // }
   }
-};
+}
 
 // Add event listener to the form submit button
-const submitButton = document.querySelector('.forgot-password__button');
-submitButton.addEventListener('click', handleFormSubmit);
+const submitButton = document.querySelector('.forgot-password__button')
+submitButton.addEventListener('click', handleFormSubmit)

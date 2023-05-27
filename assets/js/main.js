@@ -1,4 +1,3 @@
-
 /*=============== SHOW HIDDEN - PASSWORD ===============*/
 const showHiddenPass = (loginPass, loginEye) => {
   const input = document.getElementById(loginPass),
@@ -27,39 +26,38 @@ const showHiddenPass = (loginPass, loginEye) => {
 showHiddenPass('login-pass', 'login-eye')
 
 const handleFormSubmit = (event) => {
-  event.preventDefault();
+  event.preventDefault()
 
-  const emailInput = document.getElementById('login-email');
-  const passwordInput = document.getElementById('login-pass');
-  const email = emailInput.value;
-  const password = passwordInput.value;
+  const emailInput = document.getElementById('login-email')
+  const passwordInput = document.getElementById('login-pass')
+  const email = emailInput.value
+  const password = passwordInput.value
 
   if (email && password) {
-    const validData = JSON.parse(localStorage.getItem('valid')) || {};
-    console.log(validData)
+    const validData = JSON.parse(localStorage.getItem('valid')) || {}
 
-    let found = false;
+    let found = false
 
     for (const user in validData) {
-      const value = validData[user];
+      const value = validData[user]
       if (email === user && password === value.password) {
-        found = true;
-        break;
+        found = true
+        break
       }
     }
 
     if (found) {
       // Save the input values to localStorage
-      localStorage.setItem('loginEmail', email);
-      localStorage.setItem('loginPassword', password);
+      localStorage.setItem('loginEmail', email)
+      localStorage.setItem('loginPassword', password)
 
-      window.location.href = 'home.html';
+      window.location.href = 'home.html'
     } else {
-      const errorMessage = document.getElementById('error-message');
-      errorMessage.textContent = 'Incorrect email or password';
+      const errorMessage = document.getElementById('error-message')
+      errorMessage.textContent = 'Incorrect email or password'
     }
   }
-};
+}
 
 window.addEventListener('load', function () {
   var loginForm = document.querySelector('.login__form')
