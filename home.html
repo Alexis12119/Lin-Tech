@@ -189,11 +189,14 @@
     .read-more {
       color: blue;
       cursor: pointer;
-      text-decoration: underline;
+      text-decoration: none;
+      border-bottom: none; /* Remove the underline */
+      transition: color 0.3s ease; /* Add transition for smooth hover effect */
     }
 
     .read-more:hover {
       text-decoration: none;
+      border-color: blue; /* Change border color on hover */
     }
 
     .hide {
@@ -437,21 +440,16 @@
 
         const modalDescription = document.getElementById('modalDescription')
         const readMoreLink = document.createElement('span')
-        readMoreLink.className = 'read-more'
-        readMoreLink.textContent = 'Read More'
 
         if (description.length > 150) {
           const shortDescription = description.substring(0, 150) + '...'
           modalDescription.textContent = shortDescription
-          modalDescription.appendChild(readMoreLink)
 
           readMoreLink.addEventListener('click', function () {
             if (readMoreLink.classList.contains('hide')) {
-              readMoreLink.textContent = 'Read Less'
               modalDescription.textContent = description
               readMoreLink.classList.remove('hide')
             } else {
-              readMoreLink.textContent = 'Read More'
               modalDescription.textContent = shortDescription
               readMoreLink.classList.add('hide')
             }
