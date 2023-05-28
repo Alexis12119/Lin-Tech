@@ -262,12 +262,73 @@
     .category-arrow:hover {
       background-color: #ddd;
     }
+/* Footer Styles */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 30px 0;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer h3 {
+  margin-bottom: 10px;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer ul li {
+  margin-bottom: 10px;
+}
+
+.footer ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer ul li a:hover {
+  text-decoration: underline;
+}
+
+.social-icons {
+  display: flex;
+  padding: 0;
+}
+
+.social-icons li {
+  margin-right: 10px;
+}
+
+.social-icons li a {
+  color: #fff;
+  font-size: 20px;
+}
+
+.social-icons li a:hover {
+  color: #ddd;
+}
+
+.footer-bottom {
+  background-color: #222;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 20px;
+}
     </style>
   <body>
     <div class="navigation-menu">
       <ul>
         <li>
-          <a href="https://github.com/Alexis12119/Alexis12119.github.io" target="_blank">
+          <a href="#" target="_blank">
             <i class="fas fa-book-open"></i>
             <a href="profile.html" class="menu-link">Profile</a>
             <a href="settings.html" class="menu-link">Settings</a>
@@ -326,6 +387,39 @@
     </div>
     <div class="tiles"></div>
 
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="#" target="_blank">Home</a></li>
+            <li><a href="#" target="_blank">Categories</a></li>
+            <li><a href="#" target="_blank">About</a></li>
+            <li><a href="#" target="_blank">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#" target="_blank">FAQ</a></li>
+            <li><a href="#" target="_blank">Terms of Service</a></li>
+            <li><a href="#" target="_blank">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Follow Us</h3>
+          <ul class="social-icons">
+            <li><a href="#" target="_blank"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+      <li><a href="https://github.com/Alexis12119/Alexis12119.github.io" target="_blank"><i class="fab fa-github"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 E-Library. All rights reserved.</p>
+      </div>
+    </footer>
     <script>
       function openModal(image, title, author, description, readLink) {
         document.getElementById('modalImage').src = image
