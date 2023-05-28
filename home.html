@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
     <link
       rel="stylesheet"
@@ -12,21 +14,6 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-    }
-
-    /* Global styles */
-    body {
-      font-family: Arial, sans-serif;
-    }
-
-    /* Navigation Menu */
-    .navigation-menu {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      background-color: #333;
-      color: #fff;
     }
 
     .search-form input {
@@ -56,6 +43,16 @@
     .search-form button:hover {
       background-color: #d0d0d0; /* Change background color on hover */
       color: black; /* Change background color on hover */
+    }
+
+    /* Navigation Menu */
+    .navigation-menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
     }
 
     .navigation-menu ul li a {
@@ -197,6 +194,7 @@
       display: none;
     }
     body {
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #d0d0d0;
@@ -232,18 +230,18 @@
       overflow-x: auto; /* Add horizontal scroll when categories overflow */
     }
 
-.category {
-  padding: 10px 15px;
-  background-color: #f1f1f1;
-  border: 1px solid #ccc; /* Add border */
-  border-radius: 4px;
-  margin-right: 10px;
-  cursor: pointer;
-}
+    .category {
+      padding: 10px 15px;
+      background-color: #f1f1f1;
+      border: 1px solid #ccc; /* Add border */
+      border-radius: 4px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
 
     .category.active {
- background-color: #555;
-  color: #fff;
+      background-color: #555;
+      color: #fff;
     }
 
     .category-arrow {
@@ -329,7 +327,6 @@
     <div class="tiles"></div>
 
     <script>
-      // JavaScript code...
       function openModal(image, title, author, description, readLink) {
         document.getElementById('modalImage').src = image
         document.getElementById('modalTitle').textContent = title
