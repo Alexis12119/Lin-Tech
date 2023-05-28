@@ -1,3 +1,14 @@
+// Retrieve input value from local storage
+const newPasswordInput = document.getElementById('new-password')
+const storedValue = localStorage.getItem('newPassword')
+newPasswordInput.value = storedValue || ''
+
+// Save input value to local storage on change
+newPasswordInput.addEventListener('input', (event) => {
+  const value = event.target.value
+  localStorage.setItem('newPassword', value)
+})
+
 const handleFormSubmit = (event) => {
   event.preventDefault()
 
@@ -6,8 +17,19 @@ const handleFormSubmit = (event) => {
 
   const validData = JSON.parse(localStorage.getItem('valid')) || {}
 
-  // Update the password for the logged in user
+  // Get the previous password for the logged in user
   const resetEmail = localStorage.getItem('resetEmail')
+  const previousPassword = validData[resetEmail].password
+
+  if (newPassword === previousPassword) {
+    errorMessage.textContent = "It's your previous password"
+    openModal()
+    newPasswordInput.focus()
+    // Show error message if the new password is the same as the previous password
+    return
+  }
+
+  // Update the password for the logged in user
   validData[resetEmail] = {
     name: validData[resetEmail].name, // Retain existing name
     password: newPassword,
@@ -22,3 +44,10 @@ const handleFormSubmit = (event) => {
 // Add event listener to the form submit button
 const submitButton = document.querySelector('.forgot-password__button')
 submitButton.addEventListener('click', handleFormSubmit)
+
+const errorMessage = document.getElementById('error-message')
+
+function openModal() {
+  const modal = document.getElementById('error-modal')
+  modal.style.display = 'block'
+}

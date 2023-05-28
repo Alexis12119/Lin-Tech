@@ -1,5 +1,5 @@
 /*=============== GOOGLE FONTS ===============*/
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 /*=============== VARIABLES CSS ===============*/
 :root {
   /*========== Colors ==========*/
@@ -8,10 +8,10 @@
   --black-color: hsl(0, 0%, 0%);
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
-  --body-font: "Poppins", sans-serif;
+  --body-font: 'Poppins', sans-serif;
   --h1-font-size: 1.75rem;
   --normal-font-size: 1rem;
-  --small-font-size: .813rem;
+  --small-font-size: 0.813rem;
   /*========== Font weight ==========*/
   --font-medium: 500;
 }
@@ -83,7 +83,8 @@ img {
   margin-left: 0px; /* Adjust the margin as per your preference */
 }
 
-.login__content, .login__box {
+.login__content,
+.login__box {
   display: grid;
 }
 .login__content {
@@ -96,7 +97,8 @@ img {
   column-gap: 0.75rem;
   border-bottom: 2px solid var(--white-color);
 }
-.login__icon, .login__eye {
+.login__icon,
+.login__eye {
   font-size: 1.25rem;
 }
 .login__input {
@@ -128,7 +130,8 @@ img {
 .login__box:nth-child(2) input {
   padding-right: 1.8rem;
 }
-.login__check, .login__check-group {
+.login__check,
+.login__check-group {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -136,7 +139,9 @@ img {
 .login__check {
   margin-bottom: 1.5rem;
 }
-.login__check-label, .login__forgot, .login__register {
+.login__check-label,
+.login__forgot,
+.login__register {
   font-size: var(--small-font-size);
 }
 .login__check-group {
@@ -352,7 +357,8 @@ img {
 }
 
 /* Input focus sticky top label */
-.register__input:not(:placeholder-shown).register__input:not(:focus) + .register__label {
+.register__input:not(:placeholder-shown).register__input:not(:focus)
+  + .register__label {
   top: -12px;
   font-size: var(--small-font-size);
 }
@@ -371,4 +377,14 @@ img {
   .register__title {
     font-size: 2rem;
   }
+}
+
+.login__input:-webkit-autofill {
+  -webkit-text-fill-color: var(--white-color) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.register__input:-webkit-autofill {
+  -webkit-text-fill-color: var(--white-color) !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
