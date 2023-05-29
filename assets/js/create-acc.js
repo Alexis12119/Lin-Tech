@@ -66,7 +66,7 @@ const handleFormSubmit = (event) => {
   localStorage.setItem('valid', JSON.stringify(validData))
 
   // Redirect to another page or perform other actions
-  window.location.href = 'index.html'
+  window.location.href = 'login.html'
 }
 
 const errorMessage = document.getElementById('error-message')

@@ -38,7 +38,7 @@ const handleFormSubmit = (event) => {
 
   // Show success message or redirect to login page
   alert('Password reset successful! Please login with your new password.')
-  window.location.href = 'index.html'
+  window.location.href = 'login.html'
 }
 
 // Add event listener to the form submit button
