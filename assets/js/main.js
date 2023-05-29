@@ -86,7 +86,7 @@ window.addEventListener('load', function () {
     // Listen for the popstate event
     window.addEventListener('popstate', function () {
       // Clear the form fields if the user navigated back to the login page
-      if (window.location.href.endsWith('login.html')) {
+      if (window.location.href.endsWith('index.html')) {
         emailInput.value = initialEmailValue
         loginForm.reset()
       }
