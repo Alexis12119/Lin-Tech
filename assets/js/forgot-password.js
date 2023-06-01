@@ -14,7 +14,9 @@ const handleFormSubmit = (event) => {
       // Redirect to the reset password page
       window.location.href = 'reset-password.html'
     } else {
-      alert('Email not found')
+      const errorMessage = document.getElementById('error-message')
+      errorMessage.textContent = 'Email not found'
+      errorMessage.style.display = 'block' // Show the error message
     }
   }
 }
