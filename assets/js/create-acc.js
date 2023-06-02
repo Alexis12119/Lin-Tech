@@ -44,61 +44,60 @@ const handleFormSubmit = (event) => {
   const email = emailInput.value.trim()
   const password = passwordInput.value.trim()
 
-  emailInput.reportValidity();
+  emailInput.reportValidity()
 
   // Check if input fields are empty
   if (name === '' || email === '' || password === '') {
-    const errorMessage= document.getElementById('error-message')
-    errorMessage.textContent = 'Please fill in all fields.';
+    const errorMessage = document.getElementById('error-message')
+    errorMessage.textContent = 'Please fill in all fields.'
     errorMessage.style.display = 'block'
-    return;
+    return
   }
 
   // Validate email format
   if (!email.includes('@')) {
-    emailInput.focus();
-    return;
-  }
-
-  // Store the input values in localStorage
-  localStorage.setItem('registerName', name)
-  localStorage.setItem('registerEmail', email)
-  localStorage.setItem('registerPassword', password)
-
-  // Retrieve existing data from localStorage or create an empty object if it doesn't exist
-  const validData = JSON.parse(localStorage.getItem('valid')) || {}
-
-  console.log(validData)
-  // Check if the email already exists in the stored data
-  if (validData.hasOwnProperty(email)) {
-    const errorMessage= document.getElementById('error-message')
-    errorMessage.textContent = 'Email already exists.'
-    errorMessage.style.display = 'block'
     emailInput.focus()
-    return;
+  } else {
+    // Store the input values in localStorage
+    localStorage.setItem('registerName', name)
+    localStorage.setItem('registerEmail', email)
+    localStorage.setItem('registerPassword', password)
+
+    // Retrieve existing data from localStorage or create an empty object if it doesn't exist
+    const validData = JSON.parse(localStorage.getItem('valid')) || {}
+
+    console.log(validData)
+    // Check if the email already exists in the stored data
+    if (validData.hasOwnProperty(email)) {
+      const errorMessage = document.getElementById('error-message')
+      errorMessage.textContent = 'Email already exists.'
+      errorMessage.style.display = 'block'
+      emailInput.focus()
+      console.log(2)
+    } else {
+      // Create the settings object for the new user
+      const settings = {
+        enableNotifications: false, // Set the default value for enableNotifications
+        selectedLanguage: 'en', // Set the default value for selectedLanguage
+        selectedTheme: 'light', // Set the default value for selectedTheme
+        selectedFontSize: 'small', // Set the default value for selectedFontSize
+      }
+
+      // Add the new user to the stored data with their settings
+      validData[email] = {
+        name: name,
+        password: password,
+        settings: settings,
+      }
+
+      // Save the updated data back to localStorage
+      localStorage.setItem('valid', JSON.stringify(validData))
+
+      console.log(1)
+      // Redirect to another page or perform other actions
+      window.location.href = 'index.html'
+    }
   }
-
-  // Create the settings object for the new user
-  const settings = {
-    enableNotifications: false, // Set the default value for enableNotifications
-    selectedLanguage: 'en', // Set the default value for selectedLanguage
-    selectedTheme: 'light', // Set the default value for selectedTheme
-    selectedFontSize: 'small', // Set the default value for selectedFontSize
-  }
-
-  // Add the new user to the stored data with their settings
-  validData[email] = {
-    name: name,
-    password: password,
-    settings: settings,
-  }
-
-  // Save the updated data back to localStorage
-  localStorage.setItem('valid', JSON.stringify(validData))
-
-  console.log(1)
-  // Redirect to another page or perform other actions
-  // window.location.href = 'index.html'
 }
 
 // Add event listener to the form submit button
