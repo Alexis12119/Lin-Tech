@@ -282,6 +282,13 @@
       text-shadow: 0px 10px 5px rgba(0, 0, 0, 0.2);
     }
 
+    .category-list {
+      display: flex;
+      overflow-x: hidden;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+
     .categories {
       display: flex;
       padding: 10px 15px;
@@ -414,8 +421,8 @@
         </button>
       </form>
     </div>
-    <h1 class="tagline">"Empowering Curious Minds"</h1>
-    <br/>
+    <!-- <h1 class="tagline">"Empowering Curious Minds"</h1> -->
+    <!-- <br/> -->
     <div class="reserved-space">
       <div class="categories">
         <div class="category-list">
@@ -448,7 +455,7 @@
         </select>
       </div>
     </div>
-    <br/><br/><br/><br/><br/><br/>
+    <br /><br /><br /><br /><br /><br />
     <div class="tiles"></div>
     <div id="bookModal" class="modal">
       <div class="modal-content">
@@ -685,15 +692,6 @@
 
       // Call the fetchBooks function initially to populate the tiles with the default category
       fetchBooks('programming')
-      function scrollCategories(direction) {
-        const categoryList = document.querySelector('.category-list')
-        const scrollAmount = 200
-        if (direction === 'left') {
-          categoryList.scrollLeft -= scrollAmount
-        } else if (direction === 'right') {
-          categoryList.scrollLeft += scrollAmount
-        }
-      }
     </script>
   </body>
 </html>
