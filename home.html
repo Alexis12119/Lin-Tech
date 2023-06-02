@@ -8,6 +8,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <style>
     * {
@@ -17,8 +21,9 @@
     }
 
     .search-form input {
+      font-family: 'Poppins', Arial, sans-serif;
       padding: 10px;
-      width: 200px; /* Adjust the width as needed */
+      width: 250px; /* Adjust the width as needed */
       border-radius: 5px;
       border: 1px solid #ccc;
       margin-right: 10px;
@@ -31,7 +36,7 @@
     }
 
     .search-form button {
-      padding: 10px 20px;
+      padding: 12px 20px;
       border-radius: 5px;
       border: none;
       background-color: #555;
@@ -47,6 +52,7 @@
 
     /* Navigation Menu */
     .navigation-menu {
+      font-family: 'Poppins', Arial, sans-serif;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -97,6 +103,15 @@
       border-color: #808080;
     }
 
+    .tile h3 {
+      font-family: 'Poppins', Arial, sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+      /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); */
+    }
+
     .tile:hover {
       transform: translateY(-5px);
       box-shadow: 0 0 50px rgba(1, 0, 0, 2.9); /* Add this line for the shadow effect */
@@ -137,6 +152,7 @@
       text-align: left; /* Adjust text alignment */
       position: relative; /* Add relative positioning */
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      font-family: 'Poppins', Arial, sans-serif;
     }
 
     .modal-content img {
@@ -148,12 +164,14 @@
 
     .modal-content h3 {
       margin-bottom: 10px;
-      font-size: 24px;
+      font-size: 20px;
+      font-family: 'Poppins', Arial, sans-serif;
     }
 
     .modal-content p {
       margin-bottom: 20px;
       font-size: 16px;
+      font-family: 'Poppins', Arial, sans-serif;
     }
 
     .close-modal {
@@ -203,8 +221,28 @@
 
     .sort-box label {
       margin-right: 5px;
+      font-family: 'Poppins', Arial, sans-serif;
     }
 
+    .sort-box select {
+      padding: 5px;
+      border-radius: 5px;
+      text-align: center;
+      border: 1px solid #ccc;
+      transition: border-color 0.3s ease;
+      font-family: 'Poppins', Arial, sans-serif; /* Add the desired font family */
+      font-size: 14px; /* Adjust the font size as needed */
+      color: #555; /* Adjust the text color */
+      background-color: #f1f1f1; /* Adjust the background color */
+      appearance: none; /* Remove the default arrow in Chrome/Safari */
+      -webkit-appearance: none; /* Remove the default arrow in Chrome/Safari */
+      -moz-appearance: none; /* Remove the default arrow in Firefox */
+      background-image: url('https://cdn2.iconfinder.com/data/icons/outline-ui-3/24/dropdown_open-512.png'); /* Add a custom arrow image */
+      background-position: right center;
+      background-repeat: no-repeat;
+      background-size: 16px;
+      padding-right: 25px;
+    }
     .sort-box select {
       padding: 5px;
       border-radius: 5px;
@@ -213,10 +251,13 @@
     }
 
     .tagline {
-      font-size: 25px;
+      font-size: 40px;
       font-weight: bold;
       margin-top: 20px;
       text-align: center;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: #333;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .categories {
@@ -228,18 +269,29 @@
 
     .category {
       padding: 10px 15px;
+      font-family: 'Poppins', Arial, sans-serif;
       background-color: #f1f1f1;
       border: 1px solid #ccc; /* Add border */
       border-radius: 4px;
       margin-right: 10px;
       cursor: pointer;
+      transition: all 0.3s ease; /* Add transition for smooth hover effect */
     }
 
     .category.active {
       background-color: #555;
+      font-family: 'Poppins', Arial, sans-serif;
       color: #fff;
     }
-
+    .category:hover {
+      background-color: #ddd;
+      color: #333;
+    }
+    .category.active:hover {
+      background-color: #555;
+      font-family: 'Poppins', Arial, sans-serif;
+      color: #fff;
+    }
     .category-arrow {
       display: flex;
       justify-content: center;
@@ -351,35 +403,39 @@
           <i class="fas fa-search"></i>
         </button>
       </form>
-    <div class="sort-box">
-      <label for="sortSelect">Sort By:</label>
-      <select id="sortSelect">
-        <option value="alphabetical">A-Z</option>
-        <option value="reverse">Z-A</option>
-        <option value="author">Author</option>
-      </select>
+      <div class="sort-box">
+        <label for="sortSelect">Sort By:</label>
+        <select id="sortSelect">
+          <option value="alphabetical">A-Z</option>
+          <option value="reverse">Z-A</option>
+          <option value="author">Author</option>
+        </select>
+      </div>
     </div>
-    </div>
-    <h1 class="tagline">Empowering Curious Minds</h1>
-    <br/>
-    <br/>
+    <h1 class="tagline">"Empowering Curious Minds"</h1>
+    <br />
+    <br />
     <div class="reserved-space">
-    <div class="categories">
-      <button class="category active" onclick="filterBooks('programming')">
-        Programming
-      </button>
-      <button class="category" onclick="filterBooks('technology')">
-        Technology
-      </button>
-      <button class="category" onclick="filterBooks('games')">Games</button>
-      <button class="category" onclick="filterBooks('science')">Science</button>
-      <button class="category" onclick="filterBooks('math')">Math</button>
-      <button class="category" onclick="filterBooks('biography')">
-        Biography
-      </button>
-      <button class="category" onclick="filterBooks('history')">History</button>
-      <!-- Add more categories as needed -->
-    </div>
+      <div class="categories">
+        <button class="category active" onclick="filterBooks('programming')">
+          Programming
+        </button>
+        <button class="category" onclick="filterBooks('technology')">
+          Technology
+        </button>
+        <button class="category" onclick="filterBooks('games')">Games</button>
+        <button class="category" onclick="filterBooks('science')">
+          Science
+        </button>
+        <button class="category" onclick="filterBooks('math')">Math</button>
+        <button class="category" onclick="filterBooks('biography')">
+          Biography
+        </button>
+        <button class="category" onclick="filterBooks('history')">
+          History
+        </button>
+        <!-- Add more categories as needed -->
+      </div>
     </div>
     <div class="tiles"></div>
     <div id="bookModal" class="modal">
