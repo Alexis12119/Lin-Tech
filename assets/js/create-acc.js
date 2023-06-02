@@ -53,6 +53,12 @@ const handleFormSubmit = (event) => {
     return;
   }
 
+  // Validate email format
+  if (!email.includes('@')) {
+    emailInput.focus();
+    return;
+  }
+
   // Store the input values in localStorage
   localStorage.setItem('registerName', name)
   localStorage.setItem('registerEmail', email)

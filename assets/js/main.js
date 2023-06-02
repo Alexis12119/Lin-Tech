@@ -34,6 +34,7 @@ const handleFormSubmit = (event) => {
   const password = passwordInput.value
 
   emailInput.reportValidity();
+
   if (email && password) {
     const validData = JSON.parse(localStorage.getItem('valid')) || {}
 
