@@ -99,7 +99,7 @@
 
     .tile:hover {
       transform: translateY(-5px);
-        box-shadow: 0 0 50px rgba(1, 0, 0, 2.9); /* Add this line for the shadow effect */
+      box-shadow: 0 0 50px rgba(1, 0, 0, 2.9); /* Add this line for the shadow effect */
     }
 
     .tile img {
@@ -213,9 +213,9 @@
     }
 
     .tagline {
-      font-size: 18px;
+      font-size: 25px;
       font-weight: bold;
-      margin-top: 10px;
+      margin-top: 20px;
       text-align: center;
     }
 
@@ -319,21 +319,29 @@
       padding: 10px 0;
       margin-top: 20px;
     }
-    .fas.fa-book-open{
+    .fas.fa-book-open {
       background-color: #333;
       margin-right: 18px;
       margin-left: 14px;
     }
-    </style>
+
+    .reserved-space {
+      height: 50px; /* Adjust the height as needed */
+      position: sticky;
+      top: 70px; /* Adjust the top position based on the height of the navigation menu */
+      background-color: transparent;
+      z-index: 999;
+    }
+  </style>
   <body>
     <div class="navigation-menu">
       <ul>
         <li>
-            <i class="fas fa-book-open"></i>
-            <a href="profile.html" class="menu-link"> Profile</a>
-            <a href="settings.html" class="menu-link">Settings</a>
-            <a href="about.html" class="menu-link">About</a>
-            <a href="index.html" class="menu-link">Logout</a>
+          <i class="fas fa-book-open"></i>
+          <a href="profile.html" class="menu-link"> Profile</a>
+          <a href="settings.html" class="menu-link">Settings</a>
+          <a href="about.html" class="menu-link">About</a>
+          <a href="index.html" class="menu-link">Logout</a>
         </li>
       </ul>
       <div class="welcome-message"></div>
@@ -343,10 +351,6 @@
           <i class="fas fa-search"></i>
         </button>
       </form>
-    </div>
-
-    <h1 class="tagline">Empowering Curious Minds</h1>
-    <div class="sort-box">
     <div class="sort-box">
       <label for="sortSelect">Sort By:</label>
       <select id="sortSelect">
@@ -355,12 +359,18 @@
         <option value="author">Author</option>
       </select>
     </div>
-
+    </div>
+    <h1 class="tagline">Empowering Curious Minds</h1>
+    <br/>
+    <br/>
+    <div class="reserved-space">
     <div class="categories">
       <button class="category active" onclick="filterBooks('programming')">
         Programming
       </button>
-      <button class="category" onclick="filterBooks('technology')">Technology</button>
+      <button class="category" onclick="filterBooks('technology')">
+        Technology
+      </button>
       <button class="category" onclick="filterBooks('games')">Games</button>
       <button class="category" onclick="filterBooks('science')">Science</button>
       <button class="category" onclick="filterBooks('math')">Math</button>
@@ -370,7 +380,7 @@
       <button class="category" onclick="filterBooks('history')">History</button>
       <!-- Add more categories as needed -->
     </div>
-
+    </div>
     <div class="tiles"></div>
     <div id="bookModal" class="modal">
       <div class="modal-content">
@@ -408,10 +418,22 @@
         <div class="footer-column">
           <h3>Follow Us</h3>
           <ul class="social-icons">
-            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-            <li><a href="https://github.com/Alexis12119/Alexis12119.github.io" target="_blank"><i class="fab fa-github"></i></a></li>
+            <li>
+              <a href="#"><i class="fab fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/Alexis12119/Alexis12119.github.io"
+                target="_blank"
+                ><i class="fab fa-github"></i
+              ></a>
+            </li>
           </ul>
         </div>
       </div>
@@ -543,7 +565,7 @@
             : 'No description available'
           const coverImage = book.volumeInfo.imageLinks
             ? book.volumeInfo.imageLinks.thumbnail
-            : 'assets/img/default_book.jpg' 
+            : 'assets/img/default_book.jpg'
           const readLink = book.volumeInfo.infoLink // Add the link to the book
 
           const tile = document.createElement('div')
@@ -586,13 +608,14 @@
 
       // Call the fetchBooks function initially to populate the tiles with the default category
       fetchBooks('programming')
+
       function scrollCategories(direction) {
-        const categoriesContainer = document.querySelector('.categories');
-        const scrollAmount = 200; // Adjust the scroll amount as needed
+        const categoriesContainer = document.querySelector('.categories')
+        const scrollAmount = 200 // Adjust the scroll amount as needed
         if (direction === 'left') {
-          categoriesContainer.scrollLeft -= scrollAmount;
+          categoriesContainer.scrollLeft -= scrollAmount
         } else if (direction === 'right') {
-          categoriesContainer.scrollLeft += scrollAmount;
+          categoriesContainer.scrollLeft += scrollAmount
         }
       }
     </script>
