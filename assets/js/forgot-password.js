@@ -4,7 +4,22 @@ const handleFormSubmit = (event) => {
   const emailInput = document.getElementById('email')
   const email = emailInput.value
 
+  // Check if input fields are empty
+  if (email == '') {
+    const errorMessage = document.getElementById('error-message')
+    errorMessage.textContent = 'Please, Enter your email';
+    errorMessage.style.display = 'block' // Show the error message
+    return;
+  }
+
   emailInput.reportValidity();
+
+  // Validate email format
+  if (!email.includes('@')) {
+    emailInput.focus();
+    return;
+  }
+  
   if (email) {
     const validData = JSON.parse(localStorage.getItem('valid')) || {}
 

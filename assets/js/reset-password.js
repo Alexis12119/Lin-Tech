@@ -1,19 +1,27 @@
-// Retrieve input value from local storage
-const newPasswordInput = document.getElementById('new-password')
-const storedValue = localStorage.getItem('newPassword')
-newPasswordInput.value = storedValue || ''
+// // Retrieve input value from local storage
+// const newPasswordInput = document.getElementById('new-password')
+// const storedValue = localStorage.getItem('newPassword')
+// newPasswordInput.value = storedValue || ''
 
-// Save input value to local storage on change
-newPasswordInput.addEventListener('input', (event) => {
-  const value = event.target.value
-  localStorage.setItem('newPassword', value)
-})
+// // Save input value to local storage on change
+// newPasswordInput.addEventListener('input', (event) => {
+//   const value = event.target.value
+//   localStorage.setItem('newPassword', value)
+// })
 
 const handleFormSubmit = (event) => {
   event.preventDefault()
 
   const newPasswordInput = document.getElementById('new-password')
   const newPassword = newPasswordInput.value
+
+  // Check if input fields are empty
+  if (newPassword == '') {
+    const errorMessage = document.getElementById('error-message')
+    errorMessage.textContent = 'Please, Enter your new Password';
+    errorMessage.style.display = 'block' // Show the error message
+    return;
+  }
 
   const validData = JSON.parse(localStorage.getItem('valid')) || {}
 
