@@ -1,25 +1,38 @@
-// Retrieve the input values from localStorage if they exist
-window.addEventListener('load', () => {
-  const nameInput = document.getElementById('register-name')
-  const emailInput = document.getElementById('register-email')
-  const passwordInput = document.getElementById('register-pass')
+// // Retrieve the input values from localStorage if they exist
+// window.addEventListener('load', () => {
+//   const nameInput = document.getElementById('register-name')
+//   const emailInput = document.getElementById('register-email')
+//   const passwordInput = document.getElementById('register-pass')
 
-  const storedName = localStorage.getItem('registerName')
-  const storedEmail = localStorage.getItem('registerEmail')
-  const storedPassword = localStorage.getItem('registerPassword')
+//   const storedName = localStorage.getItem('registerName')
+//   const storedEmail = localStorage.getItem('registerEmail')
+//   const storedPassword = localStorage.getItem('registerPassword')
 
-  if (storedName) {
-    nameInput.value = storedName
-  }
+//   if (storedName) {
+//     nameInput.value = storedName
+//   }
 
-  if (storedEmail) {
-    emailInput.value = storedEmail
-  }
+//   if (storedEmail) {
+//     emailInput.value = storedEmail
+//   }
 
-  if (storedPassword) {
-    passwordInput.value = storedPassword
-  }
-})
+//   if (storedPassword) {
+//     passwordInput.value = storedPassword
+//   }
+// })
+
+// // Clear the saved response when navigating back to the register page
+// window.addEventListener('pageshow', (event) => {
+//   if (event.persisted) {
+//     clearSavedResponse();
+//   }
+// });
+
+// function clearSavedResponse() {
+//   localStorage.removeItem('registerName');
+//   localStorage.removeItem('registerEmail');
+//   localStorage.removeItem('registerPassword');
+// }
 
 const handleFormSubmit = (event) => {
   event.preventDefault()
@@ -30,6 +43,15 @@ const handleFormSubmit = (event) => {
   const name = nameInput.value.trim()
   const email = emailInput.value.trim()
   const password = passwordInput.value.trim()
+
+  emailInput.reportValidity();
+
+  // Check if input fields are empty
+  if (name === '' || email === '' || password === '') {
+    errorMessage.textContent = 'Please fill in all fields.';
+    openModal();
+    return;
+  }
 
   // Store the input values in localStorage
   localStorage.setItem('registerName', name)
@@ -44,7 +66,7 @@ const handleFormSubmit = (event) => {
     errorMessage.textContent = 'Email already exists.'
     openModal()
     emailInput.focus()
-    return
+    return;
   }
 
   // Create the settings object for the new user

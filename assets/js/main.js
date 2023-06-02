@@ -33,6 +33,7 @@ const handleFormSubmit = (event) => {
   const email = emailInput.value
   const password = passwordInput.value
 
+  emailInput.reportValidity();
   if (email && password) {
     const validData = JSON.parse(localStorage.getItem('valid')) || {}
 
@@ -55,6 +56,7 @@ const handleFormSubmit = (event) => {
     } else {
       const errorMessage = document.getElementById('error-message')
       errorMessage.textContent = 'Incorrect email or password'
+      // Display popup requesting the user to include "@"
     }
   }
 }

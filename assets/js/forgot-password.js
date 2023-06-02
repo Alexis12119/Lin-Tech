@@ -4,6 +4,7 @@ const handleFormSubmit = (event) => {
   const emailInput = document.getElementById('email')
   const email = emailInput.value
 
+  emailInput.reportValidity();
   if (email) {
     const validData = JSON.parse(localStorage.getItem('valid')) || {}
 
