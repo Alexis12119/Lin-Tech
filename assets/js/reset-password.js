@@ -30,8 +30,9 @@ const handleFormSubmit = (event) => {
   const previousPassword = validData[resetEmail].password
 
   if (newPassword === previousPassword) {
+    const errorMessage = document.getElementById('error-message')
     errorMessage.textContent = "It's your previous password"
-    openModal()
+    errorMessage.style.display = 'block'
     newPasswordInput.focus()
     // Show error message if the new password is the same as the previous password
     return
@@ -52,10 +53,3 @@ const handleFormSubmit = (event) => {
 // Add event listener to the form submit button
 const submitButton = document.querySelector('.forgot-password__button')
 submitButton.addEventListener('click', handleFormSubmit)
-
-const errorMessage = document.getElementById('error-message')
-
-function openModal() {
-  const modal = document.getElementById('error-modal')
-  modal.style.display = 'block'
-}

@@ -45,6 +45,7 @@ const handleFormSubmit = (event) => {
   const password = passwordInput.value.trim()
 
   emailInput.reportValidity()
+  console.log(emailInput.reportValidity())
 
   // Check if input fields are empty
   if (name === '' || email === '' || password === '') {
@@ -55,7 +56,7 @@ const handleFormSubmit = (event) => {
   }
 
   // Validate email format
-  if (!email.includes('@')) {
+  if (!emailInput.reportValidity()) {
     emailInput.focus()
   } else {
     // Store the input values in localStorage
@@ -99,10 +100,6 @@ const handleFormSubmit = (event) => {
     }
   }
 }
-
-// Add event listener to the form submit button
-const submitButton = document.querySelector('.register__button')
-submitButton.addEventListener('click', handleFormSubmit)
 
 /*=============== SHOW HIDDEN - PASSWORD ===============*/
 const showHiddenPass = (loginPass, loginEye) => {
