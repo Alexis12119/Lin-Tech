@@ -48,8 +48,9 @@ const handleFormSubmit = (event) => {
 
   // Check if input fields are empty
   if (name === '' || email === '' || password === '') {
+    const errorMessage= document.getElementById('error-message')
     errorMessage.textContent = 'Please fill in all fields.';
-    openModal();
+    errorMessage.style.display = 'block'
     return;
   }
 
@@ -67,10 +68,12 @@ const handleFormSubmit = (event) => {
   // Retrieve existing data from localStorage or create an empty object if it doesn't exist
   const validData = JSON.parse(localStorage.getItem('valid')) || {}
 
+  console.log(validData)
   // Check if the email already exists in the stored data
   if (validData.hasOwnProperty(email)) {
+    const errorMessage= document.getElementById('error-message')
     errorMessage.textContent = 'Email already exists.'
-    openModal()
+    errorMessage.style.display = 'block'
     emailInput.focus()
     return;
   }
@@ -93,15 +96,9 @@ const handleFormSubmit = (event) => {
   // Save the updated data back to localStorage
   localStorage.setItem('valid', JSON.stringify(validData))
 
+  console.log(1)
   // Redirect to another page or perform other actions
-  window.location.href = 'index.html'
-}
-
-const errorMessage = document.getElementById('error-message')
-
-function openModal() {
-  const modal = document.getElementById('error-modal')
-  modal.style.display = 'block'
+  // window.location.href = 'index.html'
 }
 
 // Add event listener to the form submit button
