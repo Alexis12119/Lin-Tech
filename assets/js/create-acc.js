@@ -1,28 +1,26 @@
-// Retrieve the input values from localStorage if they exist
-window.addEventListener('load', () => {
-  const validData = JSON.parse(localStorage.getItem('valid')) || {}
-  const nameInput = document.getElementById('register-name')
-  const emailInput = document.getElementById('register-email')
-  const passwordInput = document.getElementById('register-pass')
+// // Retrieve the input values from localStorage if they exist
+// window.addEventListener('load', () => {
+//   const validData = JSON.parse(localStorage.getItem('valid')) || {}
+//   const nameInput = document.getElementById('register-name')
+//   const emailInput = document.getElementById('register-email')
+//   const passwordInput = document.getElementById('register-pass')
 
-  const storedName = localStorage.getItem('registerName')
-  const storedEmail = localStorage.getItem('registerEmail')
-  const storedPassword = localStorage.getItem('registerPassword')
+//   const storedName = localStorage.getItem('registerName')
+//   const storedEmail = localStorage.getItem('registerEmail')
+//   const storedPassword = localStorage.getItem('registerPassword')
 
-  if (!validData.hasOwnProperty(storedEmail)) {
-    if (storedName) {
-      nameInput.value = storedName
-    }
+//   if (storedName) {
+//     nameInput.value = storedName
+//   }
 
-    if (storedEmail) {
-      emailInput.value = storedEmail
-    }
+//   if (storedEmail) {
+//     emailInput.value = storedEmail
+//   }
 
-    if (storedPassword) {
-      passwordInput.value = storedPassword
-    }
-  }
-})
+//   if (storedPassword) {
+//     passwordInput.value = storedPassword
+//   }
+// })
 
 const handleFormSubmit = (event) => {
   event.preventDefault()
