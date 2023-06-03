@@ -20,6 +20,31 @@
       padding: 0;
     }
 
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #d0d0d0;
+    }
+
+    /* Modern Scrollbar Styles */
+    body::-webkit-scrollbar {
+      width: 10px; /* Set the width of the scrollbar */
+    }
+
+    body::-webkit-scrollbar-track {
+      background-color: #ddd; /* Set the background color of the scrollbar track */
+      border-radius: 15px; /* Add a border radius to the scrollbar thumb */
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color: gray; /* Set the color of the scrollbar thumb */
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+      background-color: #555; /* Set the color of the scrollbar thumb on hover */
+    }
+
     .search-form input {
       font-family: 'Poppins', Arial, sans-serif;
       padding: 10px;
@@ -229,12 +254,6 @@
     .hide {
       display: none;
     }
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #d0d0d0;
-    }
 
     .sort-box {
       margin-top: 2px;
@@ -287,13 +306,33 @@
       overflow-x: hidden;
       flex-wrap: nowrap;
       overflow-x: auto;
+      padding-top: 10px;
+    }
+
+    /* Style the scrollbar for small screens */
+    .category-list::-webkit-scrollbar {
+      width: 8px; /* Set the width of the scrollbar */
+    }
+    .category-list::-webkit-scrollbar-track {
+      background-color: transparent; /* Set the background color of the scrollbar track */
+      border-radius: 15px; /* Add border radius to the thumb */
+    }
+
+    .category-list::-webkit-scrollbar-thumb {
+      background-color: gray; /* Set the color of the scrollbar thumb */
+      border-radius: 15px; /* Add border radius to the thumb */
+    }
+
+    .category-list::-webkit-scrollbar-thumb:hover {
+      background-color: #555; /* Set the color of the scrollbar thumb on hover */
+      border-radius: 15px; /* Add border radius to the thumb */
     }
 
     .categories {
       display: flex;
       padding: 10px 15px;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 10px; /* Reduce the margin bottom to create less space */
       padding: 30px 15px;
     }
 
@@ -437,12 +476,16 @@
             Science
           </button>
           <button class="category" onclick="filterBooks('math')">Math</button>
-          <button class="category" onclick="filterBooks('biography')">
-            Biography
+          <button class="category" onclick="filterBooks('english')">
+            English
           </button>
           <button class="category" onclick="filterBooks('history')">
             History
           </button>
+          <button class="category" onclick="filterBooks('filipino')">
+            Filipino
+          </button>
+
           <!-- Add more categories as needed -->
         </div>
       </div>
