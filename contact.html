@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Contact Us</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .contact {
+        background-color: rgba(0, 0, 0, 0.3);
+        border: 2px solid #fff;
+        border-radius: 1rem;
+        padding: 2.5rem 1.5rem;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+      }
+
+      .contact__container {
+        text-align: center;
+      }
+
+      .contact__title {
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+      }
+
+      .contact__content,
+      .contact__box {
+        display: grid;
+        row-gap: 1.75rem;
+        margin-bottom: 0px;
+      }
+
+      .contact__box {
+        grid-template-columns: max-content 1fr;
+        align-items: center;
+        column-gap: 0.75rem;
+      }
+      .contact__message::-webkit-scrollbar {
+        width: 0px; /* Set the width of the scrollbar */
+      }
+
+      .contact__icon {
+        font-size: 1.25rem;
+      }
+
+      .contact__input {
+        width: 100%;
+        padding-block: 0.8rem;
+        background: none;
+        color: #fff;
+        position: relative;
+        z-index: 1;
+      }
+
+      .contact__label {
+        position: absolute;
+        left: 0;
+        top: 13px;
+        font-weight: 500;
+        transition: top 0.3s, font-size 0.3s;
+      }
+
+      .contact__message {
+        width: 100%;
+        font-family: 'Poppins', Arial, sans-serif;
+        padding: 0.8rem;
+        background: none;
+        color: #fff;
+        height: 120%;
+        resize: none;
+        position: relative;
+        z-index: 1;
+      }
+
+      .contact__button {
+        width: 100%;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background-color: #fff;
+        color: #121212;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      .contact__input,
+      .contact__message {
+        font-family: 'Poppins', Arial, sans-serif;
+        color: #fff;
+      }
+
+      .contact__input::placeholder,
+      .contact__message::placeholder {
+        color: #fff;
+      }
+
+      .contact__input:-webkit-autofill,
+      .contact__message:-webkit-autofill {
+        -webkit-text-fill-color: var(--white-color) !important;
+        transition: background-color 5000s ease-in-out 0s;
+      }
+
+      .contact__error {
+        display: none;
+        /* Hide the error message by default */
+        color: white;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        line-height: 0;
+        /* Reduce the line height */
+      }
+    </style>
+  </head>
+  <body>
+    <img src="assets/img/bg.jpg" alt="login image" class="login__img" />
+    <div class="contact">
+      <div class="contact__container">
+        <h1 class="contact__title">Contact Us</h1>
+        <div class="contact__content">
+          <div class="contact__box">
+            <i class="ri-edit-line contact__icon"></i>
+            <textarea
+              id="message"
+              required
+              class="contact__message"
+              placeholder="Your Message"
+            ></textarea>
+          </div>
+          <div id="error-message" class="contact__error"></div>
+          <button class="contact__button" onclick="handleFormSubmit(event)">
+            Send Message
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!--=============== MAIN JS ===============-->
+  <script src="assets/js/contact.js"></script>
+</html>
