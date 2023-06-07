@@ -17,6 +17,7 @@
 
       body {
         font-family: 'Poppins', Arial, sans-serif;
+        background-color: #d0d0d0;
       }
 
       .settings-container {
@@ -24,16 +25,15 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        background-color: #d0d0d0;
       }
 
       .settings-card {
-        max-width: 400px;
-        height: 70vh; /* Adjusted the height to 70% of the viewport height */
+        max-width: 80%;
+        max-height: 450px; /* Adjusted the height to 70% of the viewport height */
         background-color: #ddd;
         border-radius: 8px;
         box-shadow: 0 0 50px rgba(1, 0, 0, 2.9); /* Add this line for the shadow effect */
-        padding: 100px;
+        padding: 80px;
         text-align: center;
       }
 
@@ -157,7 +157,7 @@
 
     <script>
       function goBack() {
-        window.history.back()
+        window.location.href = 'home.html'
       }
 
       function saveSettings() {
