@@ -815,5 +815,35 @@
       // Call the fetchAllBooks function initially to populate the tiles with all categories
       fetchAllBooks()
     </script>
+ <script>
+    // Check if there is stored data in sessionStorage
+    if (sessionStorage.getItem('pageData')) {
+      // Retrieve the stored data
+      const pageData = JSON.parse(sessionStorage.getItem('pageData'));
+
+      // Apply the stored data to the page elements
+      // For example, to retain the active category
+      const activeCategory = pageData.activeCategory;
+      filterBooks(activeCategory)
+
+
+      // Apply other stored data to the respective elements
+
+      // Clear the sessionStorage after retrieving the data
+      sessionStorage.removeItem('pageData');
+    }
+
+    // Add an event listener to save the necessary data when the page unloads
+    window.addEventListener('beforeunload', () => {
+      const activeCategory = document.querySelector('.category.active');
+      const pageData = {
+        activeCategory: activeCategory ? activeCategory.dataset.category : null,
+        // Add other necessary data to the object
+      };
+
+      // Store the data in sessionStorage
+      sessionStorage.setItem('pageData', JSON.stringify(pageData));
+    });
+  </script>
   </body>
 </html>
