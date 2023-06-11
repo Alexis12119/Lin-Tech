@@ -23,6 +23,10 @@
   margin: 0;
 }
 
+body {
+    background: linear-gradient(to right, #000, #000 0%, #737373 75%);
+}
+
 body,
 input,
 button {

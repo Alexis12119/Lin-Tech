@@ -24,7 +24,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #d0d0d0;
+      background: linear-gradient(to right, #000, #000 0%, #737373 75%);
     }
 
     /* Modern Scrollbar Styles */
@@ -142,7 +142,7 @@
       border: 1px solid gray;
       text-align: center;
       transition: all 0.3s ease;
-      background-color: #ddd;
+      background: linear-gradient(to left, #000, #000 0%, #737373 75%);
       border-color: #808080;
       box-shadow: 0px 10px 10px rgba(1, 0, 0, 0.9); /* Add this line for the shadow effect */
     }
@@ -153,7 +153,7 @@
       font-weight: bold;
       margin-bottom: 10px;
       padding-top: 15px;
-      color: #333;
+      color: white;
       /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); */
     }
 
@@ -194,10 +194,11 @@
     }
 
     .modal-content {
-      background-color: #d0d0d0;
+      background: linear-gradient(#a6a6a6, #a6a6a6 0%, #ddd 75%);
       border-radius: 15px;
       padding: 20px;
       max-width: 500px;
+      width:500px;
       text-align: center;
       max-height: 500px; /* Limit the height of the modal content */
       overflow-y: auto; /* Add a vertical scrollbar when content exceeds max-height */
@@ -225,6 +226,25 @@
       margin-bottom: 20px;
       font-size: 16px;
       font-family: 'Poppins', Arial, sans-serif;
+    }
+
+    /* Style the scrollbar for small screens */
+    .modal-content::-webkit-scrollbar {
+      width: 8px; /* Set the width of the scrollbar */
+    }
+    .modal-content::-webkit-scrollbar-track {
+      background-color: transparent; /* Set the background color of the scrollbar track */
+      border-radius: 15px; /* Add border radius to the thumb */
+    }
+
+    .modal-content::-webkit-scrollbar-thumb {
+      color: transparent;
+      border-radius: 15px; /* Add border radius to the thumb */
+    }
+
+    .modal-content::-webkit-scrollbar-thumb:hover {
+      background-color: #555; /* Set the color of the scrollbar thumb on hover */
+      border-radius: 15px; /* Add border radius to the thumb */
     }
 
     .close-modal {
@@ -268,7 +288,7 @@
 
     .sort-box label {
       font-family: 'Poppins', Arial, sans-serif;
-      background-color: #333; /* Adjust the background color */
+      background: linear-gradient(#333, #333 100%, #ddd 0%);
       color: white;
       border: round;
       border-radius: 50px;
@@ -344,7 +364,8 @@
     .category {
       padding: 10px 15px;
       font-family: 'Poppins', Arial, sans-serif;
-      background-color: #f1f1f1;
+      /* background-color: #f1f1f1; */
+      background: linear-gradient(#a6a6a6, #a6a6a6 0%, #ddd 75%);
       border: 1px solid #f1f1f1; /* Add border */
       border-radius: 15px;
       margin-right: 10px;
@@ -354,18 +375,17 @@
     }
 
     .category.active {
-      background-color: #333;
+      /* background-color: #333; */
+      background: linear-gradient(#333, #333 100%, #ddd 0%);
       font-family: 'Poppins', Arial, sans-serif;
       border-color: #333;
       color: #fff;
     }
     .category:hover {
-      background-color: #ddd;
-      border-color: #ddd;
+      border-color: #333;
       color: #333;
     }
     .category.active:hover {
-      background-color: #333;
       border-color: #333;
       font-family: 'Poppins', Arial, sans-serif;
       color: #fff;
@@ -781,9 +801,7 @@
             : 'Unknown Author'
           const description =
             book.volumeInfo.description || 'No description available'
-          const coverImage = book.volumeInfo.imageLinks
-            ? book.volumeInfo.imageLinks.thumbnail
-            : 'assets/img/default_book.jpg'
+          const coverImage = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'assets/img/unknown.jpg'
           const readLink = book.volumeInfo.infoLink
           const rating =
             book.volumeInfo && book.volumeInfo.averageRating
@@ -794,7 +812,7 @@
           tile.classList.add('tile')
           tile.setAttribute('data-author', author)
           tile.innerHTML = `
-      <img src="${coverImage}" alt="${title}" />
+      <img src="${coverImage}" alt="${title}" width="100px" height="100px"/>
       <h3>${title}</h3>
     `
 
