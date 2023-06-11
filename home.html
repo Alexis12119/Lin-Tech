@@ -187,6 +187,12 @@
       transition: all 0.3s ease;
     }
 
+    .modal-content .rating {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: black;
+    }
+
     .modal-content {
       background-color: #d0d0d0;
       border-radius: 15px;
@@ -469,18 +475,19 @@
         </button>
       </form>
     </div>
-    <!-- <h1 class="tagline">"Empowering Curious Minds"</h1> -->
-    <!-- <br/> -->
     <div class="reserved-space">
       <div class="categories">
         <div class="category-list">
-          <button class="category active" onclick="filterBooks('programming')">
+          <button class="category active" onclick="filterBooks('all')">
+            All
+          </button>
+          <button class="category" onclick="filterBooks('programming')">
             Programming
           </button>
-          <button class="category" onclick="filterBooks('technology')">
-            Technology
-          </button>
           <button class="category" onclick="filterBooks('games')">Games</button>
+          <button class="category" onclick="filterBooks('love')">
+            Romance
+          </button>
           <button class="category" onclick="filterBooks('science')">
             Science
           </button>
@@ -514,6 +521,7 @@
         <img id="modalImage" src="" alt="Book Cover" />
         <h3 id="modalTitle"></h3>
         <p id="modalAuthor"></p>
+        <div id="modalRating" class="rating"></div>
         <div id="modalDescription" class="description"></div>
         <a id="readNowButton" class="read-button" href="#" target="_blank"
           >Read Now</a
@@ -571,7 +579,7 @@
       </div>
     </footer>
     <script>
-      function openModal(image, title, author, description, readLink) {
+      function openModal(image, title, author, rating, description, readLink) {
         document.getElementById('modalImage').src = image
         document.getElementById('modalTitle').textContent = title
         document.getElementById('modalAuthor').textContent = author
@@ -595,6 +603,12 @@
         } else {
           modalDescription.textContent = description
         }
+
+        // Update rating information
+        const modalRating = document.createElement('p')
+        modalRating.textContent = `Rating: ${rating}`
+        modalRating.classList.add('rating')
+        modalDescription.appendChild(modalRating)
 
         document.getElementById('bookModal').style.opacity = '1'
         document.getElementById('bookModal').style.visibility = 'visible'
@@ -680,53 +694,23 @@
 
       // Call the sort function initially to display the tiles in the default order
       sortTiles()
+
+      const bookCache = {}
+
       async function fetchBooks(category) {
-        const response = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=${category}`
-        )
-        const data = await response.json()
+        if (bookCache[category]) {
+          displayBooks(bookCache[category])
+        } else {
+          const response = await fetch(
+            `https://www.googleapis.com/books/v1/volumes?q=${category}&maxResults=20`
+          )
+          const data = await response.json()
+          const books = data.items || []
 
-        // Process the fetched data and display it on your webpage
-        const books = data.items
-        const tilesContainer = document.querySelector('.tiles')
+          bookCache[category] = books
 
-        // Clear existing tiles
-        tilesContainer.innerHTML = ''
-
-        books.forEach((book) => {
-          const title = book.volumeInfo.title
-          const author = book.volumeInfo.authors
-            ? book.volumeInfo.authors[0]
-            : 'Unknown Author'
-          const description = book.volumeInfo.description
-            ? book.volumeInfo.description
-            : 'No description available'
-          const coverImage = book.volumeInfo.imageLinks
-            ? book.volumeInfo.imageLinks.thumbnail
-            : 'assets/img/default_book.jpg'
-          const readLink = book.volumeInfo.infoLink // Add the link to the book
-
-          const tile = document.createElement('div')
-          tile.classList.add('tile')
-          tile.setAttribute('data-author', author)
-          tile.setAttribute('data-category', category) // Add data-category attribute
-          tile.innerHTML = `
-      <img src="${coverImage}" alt="${title}" />
-      <h3>${title}</h3>
-    `
-
-          tile.addEventListener('click', function () {
-            openModal(
-              coverImage,
-              title,
-              `Author: ${author}`,
-              description,
-              readLink
-            ) // Pass the readLink to the openModal function
-          })
-
-          tilesContainer.appendChild(tile)
-        })
+          displayBooks(books)
+        }
       }
       // Filter the books based on the selected category
       function filterBooks(category) {
@@ -741,11 +725,91 @@
           }
         }
 
-        fetchBooks(category) // Fetch books for the selected category
+        if (category === 'all') {
+          fetchAllBooks() // Fetch books for all categories
+        } else {
+          fetchBooks(category) // Fetch books for the selected category
+        }
+      }
+      async function fetchAllBooks() {
+        const categories = [
+          'programming',
+          'games',
+          'love',
+          'science',
+          'math',
+          'english',
+          'history',
+          'filipino',
+        ]
+        const allBooks = []
+
+        for (let i = 0; i < categories.length; i++) {
+          const category = categories[i]
+
+          if (bookCache[category]) {
+            allBooks.push(...bookCache[category])
+          } else {
+            const response = await fetch(
+              `https://www.googleapis.com/books/v1/volumes?q=${category}&maxResults=20`
+            )
+            const data = await response.json()
+            const books = data.items || []
+
+            allBooks.push(...books)
+            bookCache[category] = books
+          }
+        }
+
+        displayBooks(allBooks)
       }
 
-      // Call the fetchBooks function initially to populate the tiles with the default category
-      fetchBooks('programming')
+      // Display the fetched books on the webpage
+      function displayBooks(books) {
+        const tilesContainer = document.querySelector('.tiles')
+        tilesContainer.innerHTML = ''
+
+        books.forEach((book) => {
+          const title = book.volumeInfo.title
+          const author = book.volumeInfo.authors
+            ? book.volumeInfo.authors[0]
+            : 'Unknown Author'
+          const description =
+            book.volumeInfo.description || 'No description available'
+          const coverImage = book.volumeInfo.imageLinks
+            ? book.volumeInfo.imageLinks.thumbnail
+            : 'assets/img/default_book.jpg'
+          const readLink = book.volumeInfo.infoLink
+          const rating =
+            book.volumeInfo && book.volumeInfo.averageRating
+              ? book.volumeInfo.averageRating
+              : 'N/A'
+
+          const tile = document.createElement('div')
+          tile.classList.add('tile')
+          tile.setAttribute('data-author', author)
+          tile.innerHTML = `
+      <img src="${coverImage}" alt="${title}" />
+      <h3>${title}</h3>
+    `
+
+          tile.addEventListener('click', function () {
+            openModal(
+              coverImage,
+              title,
+              `Author: ${author}`,
+              rating,
+              description,
+              readLink
+            )
+          })
+
+          tilesContainer.appendChild(tile)
+        })
+      }
+
+      // Call the fetchAllBooks function initially to populate the tiles with all categories
+      fetchAllBooks()
     </script>
   </body>
 </html>
