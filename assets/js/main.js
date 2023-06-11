@@ -30,10 +30,12 @@ const handleFormSubmit = (event) => {
 
   const emailInput = document.getElementById('login-email')
   const passwordInput = document.getElementById('login-pass')
+  const rememberMeCheckbox = document.querySelector('.login__check-input')
+
   const email = emailInput.value
   const password = passwordInput.value
 
-  emailInput.reportValidity();
+  emailInput.reportValidity()
 
   if (email && password) {
     const validData = JSON.parse(localStorage.getItem('valid')) || {}
@@ -49,9 +51,11 @@ const handleFormSubmit = (event) => {
     }
 
     if (found) {
-      // Save the input values to localStorage
-      localStorage.setItem('loginEmail', email)
-      localStorage.setItem('loginPassword', password)
+      if (rememberMeCheckbox.checked) {
+        // Save the input values to localStorage
+        localStorage.setItem('loginEmail', email)
+        localStorage.setItem('loginPassword', password)
+      }
 
       window.location.href = 'home.html'
     } else {
@@ -64,32 +68,63 @@ const handleFormSubmit = (event) => {
 window.addEventListener('load', function () {
   var loginForm = document.querySelector('.login__form')
 
-  // Check if the form is submitted
   if (loginForm) {
-    // Save the initial email input value
     var emailInput = loginForm.querySelector('input[type="email"]')
-    var initialEmailValue = localStorage.getItem('email')
+    var passwordInput = loginForm.querySelector('input[type="password"]')
+    var rememberMeCheckbox = loginForm.querySelector('.login__check-input')
 
-    // Set the email input value from storage
-    if (initialEmailValue) {
-      emailInput.value = initialEmailValue
+    // Set the email input value from storage if "Remember me" is checked
+    const rememberMe = localStorage.getItem('rememberMe')
+    if (rememberMe === 'true') {
+      const savedEmail = localStorage.getItem('loginEmail')
+      if (savedEmail) {
+        emailInput.value = savedEmail
+        rememberMeCheckbox.checked = true
+      }
+
+      const savedPassword = localStorage.getItem('loginPassword')
+      if (savedPassword) {
+        passwordInput.value = savedPassword
+      }
     }
 
     // Save the email input value to storage when it changes
     emailInput.addEventListener('input', function () {
-      localStorage.setItem('email', emailInput.value)
+      if (rememberMeCheckbox.checked) {
+        localStorage.setItem('loginEmail', emailInput.value)
+      }
     })
 
-    // Clear the email input from storage when the form is submitted
+    // Save the password input value to storage when it changes
+    passwordInput.addEventListener('input', function () {
+      if (rememberMeCheckbox.checked) {
+        localStorage.setItem('loginPassword', passwordInput.value)
+      }
+    })
+
+    // Save the remember me state to storage when the checkbox is clicked
+    rememberMeCheckbox.addEventListener('click', function () {
+      if (rememberMeCheckbox.checked) {
+        localStorage.setItem('rememberMe', 'true')
+        localStorage.setItem('loginEmail', emailInput.value)
+        localStorage.setItem('loginPassword', passwordInput.value)
+      } else {
+        localStorage.removeItem('rememberMe')
+      }
+    })
+
+    // Clear the saved values from storage when the form is submitted
     loginForm.addEventListener('submit', function () {
-      localStorage.removeItem('email')
+      localStorage.removeItem('loginEmail')
+      localStorage.removeItem('loginPassword')
     })
 
     // Listen for the popstate event
     window.addEventListener('popstate', function () {
-      // Clear the form fields if the user navigated back to the login page
       if (window.location.href.endsWith('index.html')) {
-        emailInput.value = initialEmailValue
+        emailInput.value = ''
+        passwordInput.value = ''
+        rememberMeCheckbox.checked = false
         loginForm.reset()
       }
     })
