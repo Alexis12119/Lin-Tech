@@ -712,6 +712,7 @@
           displayBooks(books)
         }
       }
+
       // Filter the books based on the selected category
       function filterBooks(category) {
         // Update the active category button
@@ -731,6 +732,7 @@
           fetchBooks(category) // Fetch books for the selected category
         }
       }
+
       async function fetchAllBooks() {
         const categories = [
           'programming',
@@ -805,9 +807,9 @@
           })
 
           tilesContainer.appendChild(tile)
-          // Use the currentSortOption to sort the tiles
-          sortTiles()
         })
+        // Use the currentSortOption to sort the tiles
+        sortTiles()
       }
 
       // Call the fetchAllBooks function initially to populate the tiles with all categories
