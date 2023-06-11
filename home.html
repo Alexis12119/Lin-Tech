@@ -198,7 +198,8 @@
       border-radius: 15px;
       padding: 20px;
       max-width: 500px;
-      width:500px;
+      width: 500px;
+      height: 500px;
       text-align: center;
       max-height: 500px; /* Limit the height of the modal content */
       overflow-y: auto; /* Add a vertical scrollbar when content exceeds max-height */
@@ -716,6 +717,13 @@
       sortTiles()
 
       const bookCache = {}
+      let currentCategory = ''
+
+      // Retrieve the current category from localStorage, if available
+      const storedCategory = localStorage.getItem('currentCategory')
+      if (storedCategory) {
+        currentCategory = storedCategory
+      }
 
       async function fetchBooks(category) {
         if (bookCache[category]) {
@@ -754,6 +762,16 @@
 
         // Scroll to the top of the page
         window.scrollTo(0, 0)
+
+        // Store the current category in localStorage
+        localStorage.setItem('currentCategory', category)
+      }
+
+      // Use the stored category if available
+      if (currentCategory) {
+        filterBooks(currentCategory)
+      } else {
+        filterBooks('all') // Default to 'all' category if no stored category found
       }
 
       async function fetchAllBooks() {
@@ -769,9 +787,7 @@
         ]
         const allBooks = []
 
-        for (let i = 0; i < categories.length; i++) {
-          const category = categories[i]
-
+        const fetchCategoryPromises = categories.map(async (category) => {
           if (bookCache[category]) {
             allBooks.push(...bookCache[category])
           } else {
@@ -784,11 +800,59 @@
             allBooks.push(...books)
             bookCache[category] = books
           }
-        }
+        })
 
+        await Promise.all(fetchCategoryPromises)
+
+        bookCache['all'] = allBooks
         displayBooks(allBooks)
       }
 
+      // Display the fetched books on the webpage
+      function displayBooks(books) {
+        const tilesContainer = document.querySelector('.tiles')
+
+        books.forEach((book) => {
+          const title = book.volumeInfo.title
+          const author = book.volumeInfo.authors
+            ? book.volumeInfo.authors[0]
+            : 'Unknown Author'
+          const description =
+            book.volumeInfo.description || 'No description available'
+          const coverImage = book.volumeInfo.imageLinks
+            ? book.volumeInfo.imageLinks.thumbnail
+            : 'assets/img/unknown.jpg'
+          const readLink = book.volumeInfo.infoLink
+          const rating =
+            book.volumeInfo && book.volumeInfo.averageRating
+              ? book.volumeInfo.averageRating
+              : 'N/A'
+
+          const tile = document.createElement('div')
+          tile.classList.add('tile')
+          tile.setAttribute('data-author', author)
+          tile.innerHTML = `
+      <img src="${coverImage}" alt="${title}" width="100px" height="100px"/>
+      <h3>${title}</h3>
+    `
+
+          tile.addEventListener('click', function () {
+            openModal(
+              coverImage,
+              title,
+              `Author: ${author}`,
+              rating,
+              description,
+              readLink
+            )
+          })
+
+          tilesContainer.appendChild(tile)
+        })
+
+        // Use the currentSortOption to sort the tiles
+        sortTiles()
+      }
       // Display the fetched books on the webpage
       function displayBooks(books) {
         const tilesContainer = document.querySelector('.tiles')
@@ -801,7 +865,9 @@
             : 'Unknown Author'
           const description =
             book.volumeInfo.description || 'No description available'
-          const coverImage = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'assets/img/unknown.jpg'
+          const coverImage = book.volumeInfo.imageLinks
+            ? book.volumeInfo.imageLinks.thumbnail
+            : 'assets/img/unknown.jpg'
           const readLink = book.volumeInfo.infoLink
           const rating =
             book.volumeInfo && book.volumeInfo.averageRating
@@ -832,38 +898,6 @@
         // Use the currentSortOption to sort the tiles
         sortTiles()
       }
-
-    </script>
-    <script>
-      // Check if there is stored data in sessionStorage
-      if (sessionStorage.getItem('pageData')) {
-        // Retrieve the stored data
-        const pageData = JSON.parse(sessionStorage.getItem('pageData'))
-
-        // Apply the stored data to the page elements
-        // For example, to retain the active category
-        const activeCategory = pageData.activeCategory
-        filterBooks(activeCategory)
-
-        // Apply other stored data to the respective elements
-
-        // Clear the sessionStorage after retrieving the data
-        sessionStorage.removeItem('pageData')
-      }
-
-      // Add an event listener to save the necessary data when the page unloads
-      window.addEventListener('beforeunload', () => {
-        const activeCategory = document.querySelector('.category.active')
-        const pageData = {
-          activeCategory: activeCategory
-            ? activeCategory.dataset.category
-            : null,
-          // Add other necessary data to the object
-        }
-
-        // Store the data in sessionStorage
-        sessionStorage.setItem('pageData', JSON.stringify(pageData))
-      })
     </script>
   </body>
 </html>
