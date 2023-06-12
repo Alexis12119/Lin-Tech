@@ -532,6 +532,7 @@
           <option value="alphabetical">A-Z</option>
           <option value="reverse">Z-A</option>
           <option value="author">Author</option>
+          <option value="rating">Rating</option>
         </select>
       </div>
     </div>
@@ -699,6 +700,13 @@
                 .localeCompare(b.getAttribute('data-author'))
             )
             break
+          case 'rating':
+            tiles.sort((a, b) => {
+              const ratingA = parseFloat(a.getAttribute('data-rating')) || 0
+              const ratingB = parseFloat(b.getAttribute('data-rating')) || 0
+              return ratingB - ratingA
+            })
+            break
         }
 
         // Append the sorted tiles to the tiles container
@@ -826,7 +834,7 @@
           const rating =
             book.volumeInfo && book.volumeInfo.averageRating
               ? book.volumeInfo.averageRating
-              : 'N/A'
+              : '0'
 
           const tile = document.createElement('div')
           tile.classList.add('tile')
@@ -877,6 +885,7 @@
           const tile = document.createElement('div')
           tile.classList.add('tile')
           tile.setAttribute('data-author', author)
+          tile.setAttribute('data-rating', rating)
           tile.innerHTML = `
       <img src="${coverImage}" alt="${title}" width="100px" height="100px"/>
       <h3>${title}</h3>
