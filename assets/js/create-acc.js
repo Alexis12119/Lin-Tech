@@ -55,7 +55,6 @@ const handleFormSubmit = (event) => {
     // Retrieve existing data from localStorage or create an empty object if it doesn't exist
     const validData = JSON.parse(localStorage.getItem('valid')) || {}
 
-    console.log(validData)
     // Check if the email already exists in the stored data
     if (validData.hasOwnProperty(email)) {
       const errorMessage = document.getElementById('error-message')
@@ -82,7 +81,7 @@ const handleFormSubmit = (event) => {
       // Save the updated data back to localStorage
       localStorage.setItem('valid', JSON.stringify(validData))
 
-      console.log(1)
+      localStorage.setItem('currentCategory', "all")
       // Redirect to another page or perform other actions
       window.location.href = 'index.html'
     }

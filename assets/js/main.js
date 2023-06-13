@@ -51,6 +51,7 @@ const handleFormSubmit = (event) => {
     }
 
     if (found) {
+      localStorage.setItem('currentCategory', 'all')
       if (rememberMeCheckbox.checked) {
         // Save the input values to localStorage
         localStorage.setItem('loginEmail', email)
