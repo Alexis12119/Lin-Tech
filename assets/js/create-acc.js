@@ -81,7 +81,6 @@ const handleFormSubmit = (event) => {
       // Save the updated data back to localStorage
       localStorage.setItem('valid', JSON.stringify(validData))
 
-      localStorage.setItem('currentCategory', "all")
       // Redirect to another page or perform other actions
       window.location.href = 'index.html'
     }
